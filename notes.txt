@@ -1,0 +1,105 @@
+filter js
+
+////////////////////////////////////////////////////////////////////////////////
+
+// // To find which checkbox is checked
+// function getSelectedFilters() {
+//     const filters = {
+//         brand: [],
+//         size: [],
+//         connectivity: [],
+//         keyswitches: [],
+//         keycaps: [],
+//         stock: [],
+//         price: {
+//             min: parseInt(minRange.value),
+//             max: parseInt(maxRange.value)
+//         }
+//     };
+
+
+//     document.querySelectorAll('.brandslist input[type="checkbox"]:checked').forEach(cb => {
+//         filters.brand.push(cb.value);
+//     });
+
+//     document.querySelectorAll('.size input[type="checkbox"]:checked').forEach(cb => {
+//         filters.size.push(cb.value);
+//     });
+
+//     document.querySelectorAll('.connectivity input[type="checkbox"]:checked').forEach(cb => {
+//         filters.connectivity.push(cb.value);
+//     });
+
+//     document.querySelectorAll('.keyswitches input[type="checkbox"]:checked').forEach(cd => {
+//         filters.keyswitches.push(cd.value);
+//     });
+
+//     document.querySelectorAll('.keycaps input[type="checkbox"]:checked').forEach(cb => {
+//         filters.keycaps.push(cd.value);
+//     });
+
+//     const stockRadio = document.querySelector('.stockstatus input[type="radio"]:checked');
+//     const stockValue = stockRadio ? stockRadio.value : "Any";
+//     filters.stock = stockValue;
+
+//     return filters;
+// }
+
+
+// // to filter the products
+// function filterProducts() {
+
+//     const filters = getSelectedFilters(); // logic to collect selected values
+//     // const products = document.querySelectorAll('.product');
+
+//     const filtered = allProducts.filter(product => {
+
+//         const price = extractNumericPrice(product.price);
+//         // const normalizedStock = normalizeStock(product.stock);
+
+//         if (price < filters.price.min || price > filters.price.max) return false;
+//         if (filters.brand.length > 0 && !filters.brand.includes(product.brand)) return false;
+//         if (filters.size.length > 0 && !filters.size.includes(product.size)) return false;
+//         if (filters.connectivity.length > 0 && !filters.connectivity.includes(product.connectivity)) return false;
+//         if (filters.keyswitches.length > 0 && !filters.keyswitches.includes(product["key-switches"])) return false;
+//         if (filters.keycaps.length > 0 && !filters.keycaps.includes(product.keycaps.material)) return false;
+        
+//         if (filters.stock.length > 1 && filters.stock === "In stock" && normalizedStock !== "In stock"){ return false;}
+//         if (filters.stock === "Out of stock" && normalizedStock !== "Out of stock"){ return false;}
+//         else{
+//             return true;
+//         }
+
+//         return true;
+//     });
+
+//     renderProducts(filtered);
+    
+// }
+
+// // function normalizeStock(stock) {
+
+// //     if (stock === "Out of stock") {
+// //         return "outofstock";
+// //     } else if (stock === "In stock") {
+// //         return "instock";
+// //     } else {
+// //         return stock;
+// //     }
+// // }
+
+
+// function extractNumericPrice(priceObj) {
+//     const raw = priceObj.discounted || priceObj.actual || priceObj.min || "₹0";
+//     return parseInt(raw.replace(/[^\d]/g, ''));
+// }
+///////
+
+In your DOMContentLoaded block, after rendering:
+
+if (typeof updateSlider === 'function') updateSlider();
+if (typeof renderProducts === 'function') renderProducts(allProducts);
+toggleClearButton(); // <- Add this line here
+
+
+That ensures the clear button is hidden when everything is fresh.

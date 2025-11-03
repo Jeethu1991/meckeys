@@ -1,0 +1,585 @@
+[
+    {
+        "id":1,
+        "name": "Hello Ganss GS 87C-HT",
+        "image": "https://mks.blr1.cdn.digitaloceanspaces.com/uploads/2022/01/GS-87C-HT-White-Peach-5-300x200.webp",
+        "rating": 4.80,
+        "size": "75%",
+        "price":{
+            "actual": "₹9,999.00",
+            "discounted": "₹5,999.00"
+        },
+        "brand": "Hello Ganss",
+        "wired":"Wireless",
+        "keyswitches": "Ajazz Flying fish",
+        "keycaps": {
+            "material": "Dye-sub PBT",
+            "style": "Double-shot"
+        },
+        "stock": "instock"
+    },
+    {
+        "id": 2,
+        "name": "Royal Kludge R75-WIRELESS",
+        "image":"https://mks.blr1.cdn.digitaloceanspaces.com/uploads/2025/06/1000105380-300x200.webp",
+        "rating": 0,
+        "size": "75%",
+        "price":{
+            "actual":"₹9,000.00",
+            "discounted": "₹5,499.00"
+        },
+        "brand": "Royal Kludge",
+        "wired":"Wireless",
+        "keyswitches": "Cream Switches",
+        "keycaps":{
+            "material": "Grey & Black keycaps",
+            "style":"Double-shot"
+        },
+        "stock": "instock"
+    },
+    {
+        "id":3,
+        "name": "Ducky One 3 Mini Pure White RGB",
+        "image": "https://mks.blr1.cdn.digitaloceanspaces.com/uploads/2022/12/Ducky-one-3-mini-pure-white-1-300x200.webp",
+        "rating": 0,
+        "size":"60%",
+        "price":{
+            "actual":"₹10,499.00",
+            "discounted": "₹5,249.50"
+        },
+        "brand":"Ducky",
+        "wired":"Wired",
+        "keyswitches":"azure",
+        "keycaps":{
+            "material": "Grey & Black keycaps",
+            "style": "Double-shot"
+        },
+        "stock": "instock"
+    },
+    {
+        "id":4,
+        "name": "Royal Kludge RK M75",
+        "image": "https://mks.blr1.cdn.digitaloceanspaces.com/uploads/2024/02/RKM75-1-300x200.webp",
+        "rating": 4.7,
+        "size":"75%",
+        "price":{
+            "actual":"₹11,000.00",
+            "discounted": "₹6,000.00"
+        },
+        "brand":"Royal Kludge",
+        "wired":"Wireless",
+        "keyswitches":"Pale Green",
+        "keycaps":{
+            "material": "Dye-sub PBT",
+            "style": "Double-shot"
+        },
+        "stock": "instock"
+    },
+     {
+        "id":5,
+        "name": "Ducky One 3 Mini Yellow",
+        "image": "https://mks.blr1.cdn.digitaloceanspaces.com/uploads/2022/02/Ducky-Yellow-One-3-Mini-2-min-scaled-300x200.webp",
+        "rating": 0,
+        "size":"60%",
+        "price":{
+            "actual":"₹8,999.00",
+            "discounted": "₹4,499.50"
+        },
+        "brand":"Ducky",
+        "wired":"Wired",
+        "keyswitches":"Cherry MX",
+        "keycaps":{
+            "material": "Dye-sub PBT",
+            "style": "Double-shot"
+        },
+        "stock": "instock"
+    },
+     {
+        "id":6,
+        "name": "ATTACK SHARK Pure White RGB",
+        "image": "https://mks.blr1.cdn.digitaloceanspaces.com/uploads/2024/02/RKM75-1-300x200.webp",
+        "rating": 4.7,
+        "size":"65%",
+        "price":{
+            "actual":"₹11,000.00",
+            "discounted": "₹6,999.00"
+        },
+        "brand":"ATTACK SHARK",
+        "wired":"Wired",
+        "keyswitches":"Cherry MX Blue",
+        "keycaps":{
+            "material": "double-shot ABS",
+            "style": "Double-shot"
+        },
+        "stock": "instock"
+    },
+     {
+        "id":7,
+        "name": "Ducky One 3 TKL Classic Black RGB",
+        "image": "https://mks.blr1.cdn.digitaloceanspaces.com/uploads/2022/12/Ducky-One-3-TKL-Classic-Black-RGB-1-300x200.webp",
+        "rating": 0,
+        "size":"80%",
+        "price":{
+            "actual":"₹12,999.00",
+            "discounted": "₹6,499.50"
+        },
+        "brand":"Ducky",
+        "wired":"Wired",
+        "keyswitches":"Beige Switch",
+        "keycaps":{
+            "material": "PBT",
+            "style": "Double-shot"
+        },
+        "stock": "instock"
+    },
+     {
+        "id":8,
+        "name": "Royal Kludge RK R75",
+        "image": "https://mks.blr1.cdn.digitaloceanspaces.com/uploads/2024/07/RK-R75-Skycyan-1-300x200.webp",
+        "rating": 4.8,
+        "size":"75%",
+        "price":{
+            "actual":"₹7,000.00",
+            "discounted": "₹4,699.00"
+        },
+        "brand":"Royal Kludge",
+        "wired":"Wireless",
+        "keyswitches":"Cabbage tofu V2",
+        "keycaps":{
+            "material": "ABS",
+            "style": "Double-shot"
+        },
+        "stock": "instock"
+    },
+     {
+        "id":9,
+        "name": "Arion Frost x Keychron K8 Pro",
+        "image": "https://mks.blr1.cdn.digitaloceanspaces.com/uploads/2023/11/2-300x200.jpg",
+        "rating": 4.91,
+        "size":"80%",
+        "price":{
+            "actual":"₹15,000.00",
+            "discounted": "₹7,999.00"
+        },
+        "brand":"Arion",
+        "wired":"Wireless",
+        "keyswitches":"Gateron G Pro Brown",
+        "keycaps":{
+            "material": "OSA PBT",
+            "style": "Double-shot"
+        },
+        "stock": "instock"
+    },
+     {
+        "id":10,
+        "name": "EPOMAKER X AJAZZ AK820 Pro",
+        "image": "https://mks.blr1.cdn.digitaloceanspaces.com/uploads/2025/07/Ajazz-AK820-Pro-Grey-Gift-Switch-01-300x200.webp",
+        "rating": 5,
+        "size":"75%",
+        "price":{
+            "actual":"₹7,500.00",
+            "discounted": "₹5,999.00"
+        },
+        "brand":"EPOMAKER",
+        "wired":"Wireless",
+        "keyswitches":"Ajazz Gift",
+        "keycaps":{
+            "material": "OSA",
+            "style": "Double-shot"
+        },
+        "stock": "instock"
+    },
+     {
+        "id":11,
+        "name": "EPOMAKER X AULA F75 Max",
+        "image": "https://mks.blr1.cdn.digitaloceanspaces.com/uploads/2025/07/EPOMAKER-X-AULA-F75-Max-Black-side-printed-02-300x200.webp",
+        "rating": 0,
+        "size":"75%",
+        "price":{
+            "actual":"₹10,500.00",
+            "discounted": "₹6,999.00"
+        },
+        "brand":"EPOMAKER",
+        "wired":"Wireless",
+        "keyswitches":"LEOBOG Reaper",
+        "keycaps":{
+            "material": "PBT",
+            "style": "Side-printed"
+        },
+        "stock": "instock"
+    },
+     {
+        "id":12,
+        "name": "EPOMAKER x AULA F75",
+        "image": "https://mks.blr1.cdn.digitaloceanspaces.com/uploads/2024/09/Product-image-removebg-preview-300x200.png",
+        "rating": 4.83,
+        "size":"75%",
+        "price":{
+            "actual":"₹7,500.00",
+            "discounted": "₹5,999.00"
+        },
+        "brand":"EPOMAKER",
+        "wired":"Wireless",
+        "keyswitches":"LEOBOG Reaper",
+        "keycaps":{
+            "material": "PBT",
+            "style": "Double-shot"
+        },
+        "stock": "instock"
+    },
+     {
+        "id":13, 
+        "name": "Keychron V1 MAX",
+        "image": "https://mks.blr1.cdn.digitaloceanspaces.com/uploads/2024/10/KEYCHRON-V1-MAX-D-1-300x200.webp",
+        "rating": 5,
+        "size":"75%",
+        "price":{
+            "actual":"₹15,000.00",
+            "discounted": "₹8,999.00"
+        },
+        "brand":"Keychron",
+        "wired":"Wireless",
+        "keyswitches":"Gateron Jupiter Red",
+        "keycaps":{
+            "material": "PBT",
+            "style": "Double-shot"
+        },
+        "stock": "instock"
+    },
+     {
+        "id":14,
+        "name": "EPOMAKER X AULA F99 Pro",
+        "image": "https://mks.blr1.cdn.digitaloceanspaces.com/uploads/2025/07/EPOMAKER-x-AULA-F99-PRO-Black-Side-Printed-01-300x200.webp",
+        "rating": 0,
+        "size":"100%",
+        "price":{
+            "min":"₹7,500.00",
+            "max": "₹7,900.00"
+        },
+        "brand":"EPOMAKER",
+        "wired":"Wireless",
+        "keyswitches":"Linear",
+        "keycaps":{
+            "material": "PBT",
+            "style": "Side-printed"
+        },
+        "stock": "instock"
+    },
+     {
+        "id":15,
+        "name": "Aula F87 Pro Wireless",
+        "image": "",
+        "rating": 4.8,
+        "size":"75%",
+        "price":{
+            "min":"₹5,000.00",
+            "max": "₹6,400.00"
+        },
+        "brand":"Aula",
+        "wired":"Wireless",
+        "keyswitches":"Linear",
+        "keycaps":{
+            "material": "PBT",
+            "style": "side-engraved"
+        },
+        "stock": "instock"
+    },
+     {
+        "id":16,
+        "name": "EPOMAKER X GALAXY 100",
+        "image": "https://mks.blr1.cdn.digitaloceanspaces.com/uploads/2025/07/Epomaker-X-Galaxy-100-Grey-07-Copy-300x200.webp",
+        "rating": 0,
+        "size":"100%",
+        "price":{
+            "min":"₹8,999.00",
+            "max":"₹10,500.00"
+        },
+        "brand":"EPOMAKER",
+        "wired":"Wireless",
+        "keyswitches":"Linear",
+        "keycaps":{
+            "material": "PBT",
+            "style": "Double-shot"
+        },
+        "stock": "instock"
+    },
+     {
+        "id":17,
+        "name": "Skyloong GK61 – V2",
+        "image": "https://mks.blr1.cdn.digitaloceanspaces.com/uploads/2025/08/GK-64-TRANSLUCENT-300x200.webp",
+        "rating": 0,
+        "size":"60%",
+        "price":{
+            "min":"₹3,500.00",
+            "max":"₹4,999.00"
+        },
+        "brand":"Skyloong",
+        "wired":"Wired",
+        "keyswitches":"Gateron Optical",
+        "keycaps":{
+            "material": "PBT",
+            "style": "OEM"
+        },
+        "stock": "instock"
+    },
+     {
+        "id":18,
+        "name": "Royal Kludge RK M75 TARO MILK",
+        "image": "https://mks.blr1.cdn.digitaloceanspaces.com/uploads/2024/09/m75-taro-milk-6-300x200.jpg",
+        "rating": 5,
+        "size":"75%",
+        "price":{
+            "actual":"₹11,000.00",
+            "discounted": "₹6,999.00"
+        },
+        "brand":"Royal Kludge",
+        "wired":"Wireless",
+        "keyswitches":"Pale Green",
+        "keycaps":{
+            "material": "PBT",
+            "style": "Double-shot"
+        },
+        "stock": "instock"
+    },
+     {
+        "id":19,
+        "name": "Royal Kludge RK H81",
+        "image": "https://mks.blr1.cdn.digitaloceanspaces.com/uploads/2024/02/RKH81-1-300x200.webp",
+        "rating": 5,
+        "size":"75%",
+        "price":{
+            "actual":"₹10,000.00",
+            "discounted": "₹6,419.00"
+        },
+        "brand":"Royal Kludge",
+        "wired":"Wireless",
+        "keyswitches":"Linear",
+        "keycaps":{
+            "material": "PBT",
+            "style": "Double-shot"
+        },
+        "stock": "instock"
+    },
+     {
+        "id":20,
+        "name": "Royal Kludge R65-WIRELESS",
+        "image": "https://mks.blr1.cdn.digitaloceanspaces.com/uploads/2025/01/Rk65-Wireless-A-300x200.png",
+        "rating": 5,
+        "size":"65%",
+        "price":{
+            "actual":"₹8,200.00",
+            "discounted": "₹5,099.00"
+        },
+        "brand":"Royal Kludge",
+        "wired":"Wireless",
+        "keyswitches":"RK Brown",
+        "keycaps":{
+            "material": "PBT",
+            "style": "Double-shot"
+        },
+        "stock": "instock"
+    },
+     {
+        "id":21, 
+        "name": "GK61 – Barebone Kit",
+        "image": "https://mks.blr1.cdn.digitaloceanspaces.com/uploads/2021/01/GK61_barebone20-300x200.webp",
+        "rating": 4.4,
+        "size":"60%",
+        "price":{
+            "min":"₹3,399.00",
+            "max":"₹8,799.00"
+        },
+        "brand":"Skyloong",
+        "wired":"Wired",
+        "keyswitches":"Gateron Optical Blue",
+        "keycaps":{
+            "material": "others",
+            "style": "others"
+        },
+        "stock": "instock"
+    },
+     {
+        "id":22, 
+        "name": "Aula M75 Aluminum Gasket Wireless",
+        "image": "https://mks.blr1.cdn.digitaloceanspaces.com/uploads/2025/01/10-300x200.webp",
+        "rating": 5,
+        "size":"75%",
+        "price":{
+            "min":"₹8,999.00",
+            "max":"₹9,999.00"
+        },
+        "brand":"Aula",
+        "wired":"Wireless",
+        "keyswitches":"SkyCyan",
+        "keycaps":{
+            "material": "PBT",
+            "style": "Double-shot"
+        },
+        "stock": "instock"
+    },
+     {
+        "id":23, 
+        "name": "ATK VXE V75X",
+        "image": "https://mks.blr1.cdn.digitaloceanspaces.com/uploads/2025/03/ATK-V75X-SERIES00-300x200.webp",
+        "rating": 0,
+        "size":"75%",
+        "price":{
+            "min":"₹6,600.00",
+            "max":"₹8,100.00"
+        },
+        "brand":"ATK",
+        "wired":"Wireless",
+        "keyswitches":"Magnetic Hall",
+        "keycaps":{
+            "material": "PBT",
+            "style": "Side-printed"
+        },
+        "stock": "instock"
+    },
+     {
+        "id":24, 
+        "name": "Keychron Q1 V2",
+        "image": "https://mks.blr1.cdn.digitaloceanspaces.com/uploads/2023/02/2021818-9359-1-300x200.webp",
+        "rating": 5,
+        "size":"75%",
+        "price":{
+            "actual":"₹25,000.00",
+            "discounted": "₹13,999.00"
+        },
+        "brand":"Keychron",
+        "wired":"Wired",
+        "keyswitches":"Gateron G Pro Blue",
+        "keycaps":{
+            "material": "PBT",
+            "style": "Double-shot"
+        },
+        "stock": "instock"
+    },
+     {
+        "id":25, 
+        "name": "Hello Ganss GS 87C-D",
+        "image": "https://mks.blr1.cdn.digitaloceanspaces.com/uploads/2022/01/GS-87C-D-Black-2-min-scaled-300x200.webp",
+        "rating": 4.6,
+        "size":"80%",
+        "price":{
+            "actual":"₹6,499.00",
+            "discounted": "₹3,999.00"
+        },
+        "brand":"Hello Ganss",
+        "wired":"Wired",
+        "keyswitches":"Ajazz Flying fish",
+        "keycaps":{
+            "material": "PBT",
+            "style": "Sublimation printed"
+        },
+        "stock": "instock"
+    },
+     {
+        "id":26, 
+        "name": "GK64 – Barebone Kit",
+        "image": "https://mks.blr1.cdn.digitaloceanspaces.com/uploads/2022/08/GK64-Barebone-Kit-Black-1-300x200.webp",
+        "rating": 0,
+        "size":"65%",
+        "price":{
+            "min":"₹4,500.00",
+            "max":"₹9,500.00"
+        },
+        "brand":"Skyloong",
+        "wired":"Wired",
+        "keyswitches":"Not Included",
+        "keycaps":{
+            "material": "Not Included",
+            "style": "Not Included"
+        },
+        "stock": "instock"
+    },
+     {
+        "id":27,
+        "name": "Aula F99 Wireless",
+        "image": "https://mks.blr1.cdn.digitaloceanspaces.com/uploads/2024/09/Aula-f99-grey-black-white-1-300x200.jpg",
+        "rating": 0,
+        "size":"99%",
+        "price":{
+            "min":"₹6,500.00",
+            "max":"₹7,500.00"
+        },
+        "brand":"Aula",
+        "wired":"Wireless",
+        "keyswitches":"SkyCyan",
+        "keycaps":{
+            "material": "PBT",
+            "style": "Double-shot"
+        },
+        "stock": "instock"
+    },
+     {
+        "id":28,
+        "name": "SK64 – PBT & RGB (Gateron Optical Switches)",
+        "image": "https://mks.blr1.cdn.digitaloceanspaces.com/uploads/2021/07/SK64_Grey_Black1-min-300x200.webp",
+        "rating": 4.9,
+        "size":"65%",
+        "price":{
+            "min":"₹5,299.00",
+            "max":"₹5,899.00"
+        },
+        "brand":"Skyloong",
+        "wired":"Wired",
+        "keyswitches":"Gateron Optical",
+        "keycaps":{
+            "material": "PBT",
+            "style": "Dy-sublinated"
+        },
+        "stock": "instock"
+    },
+     {
+        "id":29,
+        "name": "Ducky One 3 Mini Pure White RGB",
+        "image": "https://mks.blr1.cdn.digitaloceanspaces.com/uploads/2022/12/Ducky-one-3-mini-pure-white-1-300x200.webp",
+        "rating": 0,
+        "size":"60%",
+        "price":"0",
+        "brand":"Ducky",
+        "wired":"Wired",
+        "keyswitches":"Cherry MX Blue",
+        "keycaps":{
+            "material": "PBT",
+            "style": "Shine-through legends"
+        },
+        "stock": "outofstock"
+    },
+     {
+        "id":30,
+        "name": "MCHOSE GX87 WIRELESS",
+        "image": "https://mks.blr1.cdn.digitaloceanspaces.com/uploads/2025/03/MCHOSE-GX87-SERIES-300x200.webp",
+        "rating": 0,
+        "size":"80%",
+        "price":"0",
+        "brand":"MCHOSE",
+        "wired":"Wireless",
+        "keyswitches":"SkyCyan",
+        "keycaps":{
+            "material": "PBT",
+            "style": "Double-shot"
+        },
+        "stock": "outofstock"
+    },
+    {
+        "id":31,
+        "name": "Keychron K8 Pro",
+        "image": "https://mks.blr1.cdn.digitaloceanspaces.com/uploads/2022/07/keychronk8pro2-300x200.webp",
+        "rating": 4.82,
+        "size":"87%",
+        "price":"0",
+        "brand":"Keychron",
+        "wired":"Wireless",
+        "keyswitches":"Gateron G Pro Red ",
+        "keycaps":{
+            "material": "PBT",
+            "style": "Double-shot"
+        },
+        "stock": "outofstock"
+    }
+]
+
+
+
