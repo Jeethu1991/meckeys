@@ -108,6 +108,8 @@ fetch('product.json')
                     filterSlide.classList.remove('active');
                 });
             }
+
+            syncBrandFilters();
         })
     .catch(error => {
         console.error('Error in fetch products:', error);
@@ -179,14 +181,12 @@ function renderProducts(products) {
 }
 
 // ------------------------------------------ All slider working---------------------------------------------------------
-
-// For All filter Slider
-function updateSlider(e) {
+function updateSlider(e){
     let minVal = parseInt(minRange.value);
     let maxVal = parseInt(maxRange.value);
 
-    if (maxVal - minVal < minGap) {
-        if (e.target.id === "minthumb") {
+    if(maxVal - minVal < minGap){
+        if(e && e.target.id === "minthumb"){
             minRange.value = maxVal - minGap;
             minVal = maxVal - minGap;
         }
@@ -207,38 +207,40 @@ function updateSlider(e) {
     maxPrice.value = `₹${maxVal}`;
 
     const clearbtn = document.getElementById('btnclearfilter');
-    
-    const minValNum = parseInt(minPrice.value.replace(/[₹,]/g, ''));
-    const maxValNum = parseInt(maxPrice.value.replace(/[₹,]/g, ''));
+    const minValNum = parseInt(minPrice.value.replace(/[₹,]/g,''));
+    const maxValNum = parseInt(maxPrice.value.replace(/[₹,]/g,''));
 
-    if(minValNum !== 3500 || maxValNum !== 13999){
-        clearbtn.style.display = 'block';
-    }
-    else{
-        clearbtn.style.display = 'none';
+    clearbtn.style.display = (minValNum !== 3500 || maxValNum !== 13999) ? 'block' : 'none';
+
+    if(!updateSlider.syncing){
+        updateSlider.syncing = true;
+
+        minthumbprice.value = minVal;
+        maxthumbprice.value = maxVal;
+        pricemin.value = `₹${minVal}`;
+        pricemax.value = `₹${maxVal}`;
+
+        priceupdateSlider();
+        updateSlider.syncing = false;
     }
 
+    toggleClearButton();
     applyAllfilter();
 }
 
 minRange.addEventListener("input", updateSlider);
 maxRange.addEventListener("input", updateSlider);
 
-document.querySelectorAll('input[type="checkbox"], input[type="radio"').forEach(input => {
-    input.addEventListener('change', toggleClearButton);
-});
-
-// For Price filter Slider
-function priceupdateSlider(e) {
+function priceupdateSlider(e){
     let minVal = parseInt(minthumbprice.value);
     let maxVal = parseInt(maxthumbprice.value);
 
-    if (maxVal - minVal < minGap) {
-        if (e.target.id === "minthumbprice") {
+    if(maxVal - minVal < minGap){
+        if(e && e.target.id === "minthumbprice"){
             minthumbprice.value = maxVal - minGap;
-            minVal = maxVal - minGap;
+            minVal = maxVal -minGap;
         }
-        else {
+        else if (e && e.target.id === "maxthumbprice"){
             maxthumbprice.value = minVal + minGap;
             maxVal = minVal + minGap;
         }
@@ -255,17 +257,26 @@ function priceupdateSlider(e) {
     pricemax.value = `₹${maxVal}`;
 
     const priceclearBtn = document.getElementById('btnpricefilter');
-
+    
     const priceMinNum = parseInt(pricemin.value.replace(/[₹,]/g,''));
     const priceMaxNum = parseInt(pricemax.value.replace(/[₹,]/g,''));
 
-    if(priceMinNum !== 3500 || priceMaxNum !== 13999){
-        priceclearBtn.style.display = 'block';
-    }
-    else{
-        priceclearBtn.style.display = 'none';
+    priceclearBtn.style.display = (priceMinNum !== 3500 || priceMaxNum !== 13999) ? 'block' : 'none';
+
+    if(!priceupdateSlider.syncing){
+        priceupdateSlider.syncing = true;
+
+        minRange.value = minVal;
+        maxRange.value = maxVal;
+        minPrice.value = `₹${minVal}`;
+        maxPrice.value = `₹${maxVal}`;
+
+        updateSlider();
+
+        priceupdateSlider.syncing = false;
     }
 
+    toggleClearButton();
     applyAllfilter();
 }
 
@@ -292,8 +303,9 @@ document.getElementById('btnclearfilter').addEventListener('click', () => {
 
 //For clear brand filter
 document.getElementById('btnbrandfilter').addEventListener('click', () => {
-    document.querySelectorAll('input[type="checkbox"]').forEach(input => input.checked = false);
+    document.querySelectorAll('.brandslistfilter input[type="checkbox"], .brandslist input[type="checkbox"]').forEach(input => input.checked = false);
     document.getElementById('btnbrandfilter').style.display = 'none';
+    syncBrandFilters();
     applyAllfilter();
 });
 
@@ -310,22 +322,59 @@ document.getElementById('btnpricefilter').addEventListener('click', () => {
     applyAllfilter();
 });
 
-// ------------------------------------------ to clear all checkboxes and radiobuttons---------------------------------------------------------
+const brandClearBtn = document.getElementById('btnbrandfilter');
+if(brandClearBtn){
+    brandClearBtn.addEventListener('click', () => {
+        document.querySelectorAll('.brandslist input[type="checkbox"], .brandslistfilter input[type="checkbox"]').forEach(cb => {
+           cb.checked = false; 
+        });
+        brandClearBtn.style.display = 'none';
 
-//clear the checkbox when the clear button is clicked
-function toggleClearButton() {
-    const minVal = parseInt(minRange.value);
-    const maxVal = parseInt(maxRange.value);
-    const anyChecked = document.querySelectorAll('input[type="checkbox"]:checked, input[type="radio"]:checked').length > 0;
-    const clearButton = document.getElementById('btnclearfilter');
+        const allFilterClearBtn = document.getElementById('btnclearfilter');
+        if(allFilterClearBtn){
+            allFilterClearBtn.style.display = 'none';
+        }
 
-    if (anyChecked || minVal !== 3500 || maxVal !== 13999) {
-        clearButton.style.display = 'block';
-    }
-    else{
-        clearButton.style.display = 'none';
-    }
+        syncBrandFilters();
+        applyAllfilter();
+    });
 }
+
+const priceClearBtn = document.getElementById('btnpricefilter');
+if(priceClearBtn){
+    priceClearBtn.addEventListener('click', () => {
+        const defaultMin = 3500;
+        const defaultmax = 13999;
+
+        if(minRange && maxRange){
+            minRange.value = defaultMin;
+            maxRange.value = defaultmax;
+        }
+
+        if(minthumbprice && maxthumbprice){
+            minthumbprice.value = defaultMin;
+            maxthumbprice.value = defaultmax;
+        }
+        
+        if (minPrice) minPrice.textContent = `₹${defaultMin}`;
+        if (maxPrice) maxPrice.textContent = `₹${defaultmax}`;
+        if (pricemin) pricemin.textContent = `₹${defaultMin}`;
+        if (pricemax) pricemax.textContent = `₹${defaultmax}`;
+
+        priceClearBtn.style.display = 'none';
+        
+        const allFilterClearBtn = document.getElementById('btnclearfilter');
+
+        if(allFilterClearBtn) allFilterClearBtn.style.display = 'none';
+
+        if (typeof updateSlider === 'function') updateSlider();
+        if (typeof priceupdateSlider === 'function') priceupdateSlider();
+
+        applyAllfilter();
+    });
+}
+
+// ------------------------------------------ to clear all checkboxes and radiobuttons---------------------------------------------------------
 
 //clear the checkbox when the clear button is clicked in brand
 function toggleBrandClearBtn() {
@@ -337,6 +386,50 @@ function toggleBrandClearBtn() {
     }
     else {
         brandclear.style.display = 'none';
+    }
+}
+
+// ------------------------------------------ brand reflects in bothe Allfunctions as well as brandfilter ---------------------------------------------------------
+
+function syncBrandFilters(){
+    if(syncBrandFilters.syncing) return;
+    syncBrandFilters.syncing = true;
+
+    const allfilterbrands = document.querySelectorAll('.brandslist input[type="checkbox"]');
+    const  brandFilterBrands = document.querySelectorAll('.brandslistfilter input[type="checkbox"]');
+
+    const selectedValues = [
+        ...Array.from(allfilterbrands),
+        ...Array.from(brandFilterBrands)
+    ]
+
+    .filter(cb => cb.checked)
+    .map(cb => cb.value.toLowerCase());
+
+    allfilterbrands.forEach(cb => {
+        cb.checked = selectedValues.includes(cb.value.toLowerCase());
+    });
+
+    brandFilterBrands.forEach(cb => {
+        cb.checked = selectedValues.includes(cb.value.toLowerCase());
+    });
+
+    syncBrandFilters.syncing = false;
+}
+
+//clear the checkbox when the clear button is clicked
+function toggleClearButton() {
+    const minVal = parseInt(minRange.value);
+    const maxVal = parseInt(maxRange.value);
+    const anyChecked = document.querySelectorAll('.brandslistFilter input[type="checkbox"]:checked, .brandslist input[type="checkbox"]:checked').length > 0;
+
+    const clearButton = document.getElementById('btnclearfilter');
+
+    if (anyChecked || minVal !== 3500 || maxVal !== 13999) {
+        clearButton.style.display = 'block';
+    }
+    else{
+        clearButton.style.display = 'none';
     }
 }
 
@@ -432,82 +525,6 @@ function applyAllfilter() {
     renderProducts(filtered);
 }
 
-// ---------------------------------------------------------------------------------------------------
-
-function SyncBrandFilters(){
-    const allBrandCheckboxes = document.querySelectorAll('.filterpannal .brandslist input[type="checkbox"]');
-    const brandPanelcheckboxes = document.querySelectorAll('.filterbrands .brandslistfilter input[type="checkbox');
-
-    // when user changes any checkbox in main "All Filters"
-    allBrandCheckboxes.forEach(cb => {
-        cb.addEventListener('change', () => {
-            brandPanelcheckboxes.forEach(other => {
-                if(other.value === cb.value){
-                    other.checked = cb.checked;
-                }
-            });
-            applyAllfilter();
-            toggleClearButton();
-        });
-    });
-
-    //When user changes any checkbox in brand panel
-    brandPanelcheckboxes.forEach(cd => {
-        cb.addEventListener('change', () =>{
-            allBrandCheckboxes.forEach(other => {
-                if(other.value === cb.value) {
-                    other.checked = cb.checked;
-                }
-            });
-            applyAllfilter();
-            toggleClearButton();
-        });
-    });
-}
-
-SyncBrandFilters();
-
-function syncPriceSliders(){
-    const minAll = document.getElementById('minthumb');
-    const maxAll = document.getElementById('maxthumb');
-    const minLabelAll = document.getElementById('lblminprice');
-    const maxLabelall = document.getElementById('lblmaxprice');
-
-    const minPrice = document.getElementById('minthumbprice');
-    const maxPrice = document.getElementById('maxthumbprice');
-    const minLabelPrice = document.getElementById('pricelblmin');
-    const maxLabelprice = document.getElementById('pricelblmax');
-
-    function updateAllFilterFromPricePanel(){
-        minAll.value = minPrice.value;
-        maxAll.value = maxPrice.value;
-        minLabelAll.value = `₹${minPrice.value}`;
-        maxLabelall.value = `₹${maxPrice.value}`;
-
-        updateSlider();
-        applyAllfilter();
-    }
-
-    function updatePricePanelFromAllFilter(){
-        minPrice.value = minAll.value;
-        maxPrice.value = maxAll.value;
-        minLabelPrice.value = `₹${minAll.value}`;
-        maxLabelprice.value = `₹${maxAll.value}`;
-
-        priceupdateSlider();
-        applyAllfilter();
-    }
-
-    [minAll,maxAll].forEach(input => {
-        input.addEventListener('input', updatePricePanelForAllFilter);
-    });
-    [minPrice, maxPrice].forEach(input => {
-        input.addEventListener('input', updateAllFilterFromPricePanel);
-    });
-}
-
-syncPriceSliders();
-
 // ------------------------------------------ Event listeners for all the buttons, checkboxes, radiobuttons, and sliders ---------------------------------------------------------
 
 minRange.addEventListener('input', applyAllfilter);
@@ -515,15 +532,29 @@ maxRange.addEventListener('input', applyAllfilter);
 inStockCheckbox.addEventListener('change', () => { applyAllfilter(); toggleClearButton(); });
 outOfStockCheckbox.addEventListener('change', () => { applyAllfilter(); toggleClearButton(); });
 stockAny.addEventListener('change', () => { applyAllfilter(); toggleClearButton(); });
-brandCheckboxes.forEach(chk => chk.addEventListener('change', () => { applyAllfilter(); toggleClearButton(); }));
+brandCheckboxes.forEach(chk => chk.addEventListener('change', () => { syncBrandFilters('all'); toggleBrandClearBtn(); toggleClearButton(); applyAllfilter(); }));
 sizeCheckboxes.forEach(chk => chk.addEventListener('change', () => { applyAllfilter(); toggleClearButton(); }));
 connectivity.forEach(chk => chk.addEventListener('change', () => { applyAllfilter(); toggleClearButton(); }));
 keyswitches.forEach(chk => chk.addEventListener('change', () => { applyAllfilter(); toggleClearButton(); }));
 keycapCheckbox.forEach(chk => chk.addEventListener('change', () => { applyAllfilter(); toggleClearButton(); }));
-filterbrandchkbox.forEach(chk => chk.addEventListener('change', () => {applyAllfilter(); toggleBrandClearBtn(); }));
+filterbrandchkbox.forEach(chk => chk.addEventListener('change', () => { syncBrandFilters('brand'); toggleBrandClearBtn(); toggleClearButton(); applyAllfilter(); }));
 minthumbprice.addEventListener('input', applyAllfilter);
 maxthumbprice.addEventListener('input', applyAllfilter);
 slider.addEventListener('input', () => { applyAllfilter(); toggleClearButton(); });
 priceslider.addEventListener('input', () => { applyAllfilter(); toggleClearButton(); });
 
+document.querySelectorAll('.brandslist input[type="checkbox"]').forEach(chk => {
+    chk.addEventListener('change', () => {
+        syncBrandFilters();
+        toggleBrandClearBtn();
+        applyAllfilter();
+    });
+});
 
+document.querySelectorAll('.brandslistfilter input[type="checkbox"').forEach(chk => {
+    chk.addEventListener('change', () => {
+        syncBrandFilters();
+        toggleBrandClearBtn();
+        applyAllfilter();
+    });
+});

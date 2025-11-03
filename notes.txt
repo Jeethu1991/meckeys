@@ -103,3 +103,93 @@ toggleClearButton(); // <- Add this line here
 
 
 That ensures the clear button is hidden when everything is fresh.
+
+----------------------- for sliders ------------------------------------
+
+// document.querySelectorAll('input[type="checkbox"], input[type="radio"').forEach(input => {
+//     input.addEventListener('change', toggleClearButton);
+// });
+
+// For Price filter Slider
+// function priceupdateSlider(e) {
+//     let minVal = parseInt(minthumbprice.value);
+//     let maxVal = parseInt(maxthumbprice.value);
+
+//     if (maxVal - minVal < minGap) {
+//         if (e.target.id === "minthumbprice") {
+//             minthumbprice.value = maxVal - minGap;
+//             minVal = maxVal - minGap;
+//         }
+//         else {
+//             maxthumbprice.value = minVal + minGap;
+//             maxVal = minVal + minGap;
+//         }
+//     }
+
+//     const sliderWidth = priceslider.offsetWidth;
+//     const minPercent = ((minVal - 3500) / (13999 - 3500)) * sliderWidth;
+//     const maxPercent = ((maxVal - 3500) / (13999 - 3500)) * sliderWidth;
+
+//     priceline.style.left = `${minPercent}px`;
+//     priceline.style.width = `${maxPercent - minPercent}px`;
+
+//     pricemin.value = `₹${minVal}`;
+//     pricemax.value = `₹${maxVal}`;
+
+//     const priceclearBtn = document.getElementById('btnpricefilter');
+
+//     const priceMinNum = parseInt(pricemin.value.replace(/[₹,]/g,''));
+//     const priceMaxNum = parseInt(pricemax.value.replace(/[₹,]/g,''));
+
+//     if(priceMinNum !== 3500 || priceMaxNum !== 13999){
+//         priceclearBtn.style.display = 'block';
+//     }
+//     else{
+//         priceclearBtn.style.display = 'none';
+//     }
+
+//     applyAllfilter();
+// }
+
+
+
+// For All filter Slider
+// function updateSlider(e) {
+//     let minVal = parseInt(minRange.value);
+//     let maxVal = parseInt(maxRange.value);
+
+//     if (maxVal - minVal < minGap) {
+//         if (e.target.id === "minthumb") {
+//             minRange.value = maxVal - minGap;
+//             minVal = maxVal - minGap;
+//         }
+//         else if(e && e.target.id === "maxthumb"){
+//             maxRange.value = minVal + minGap;
+//             maxVal = minVal + minGap;
+//         }
+//     }
+
+//     const sliderWidth = slider.offsetWidth;
+//     const minPercent = ((minVal - 3500) / (13999 - 3500)) * sliderWidth;
+//     const maxPercent = ((maxVal - 3500) / (13999 - 3500)) * sliderWidth;
+
+//     priceline.style.left = `${minPercent}px`;
+//     priceline.style.width = `${maxPercent - minPercent}px`;
+
+//     minPrice.value = `₹${minVal}`;
+//     maxPrice.value = `₹${maxVal}`;
+
+//     const clearbtn = document.getElementById('btnclearfilter');
+    
+//     const minValNum = parseInt(minPrice.value.replace(/[₹,]/g, ''));
+//     const maxValNum = parseInt(maxPrice.value.replace(/[₹,]/g, ''));
+
+//     if(minValNum !== 3500 || maxValNum !== 13999){
+//         clearbtn.style.display = 'block';
+//     }
+//     else{
+//         clearbtn.style.display = 'none';
+//     }
+
+//     applyAllfilter();
+// }
