@@ -1554,5 +1554,54 @@ input[type="range"]::-webkit-slider-thumb{
     font-family: font5;
 }
 
+.active-filters{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 8px 0;
+}
+
+.filter-pill{
+    background-color: var(--currentColor);
+    border: none;
+    border-radius: 5.4px;
+    box-shadow: inset 0 0 0 1px var(--filter-buttons);
+    color: var(--filter-buttons);
+    cursor: default;
+    display: inline-flex;
+    font-family: bold;
+    font-size: 12px;
+    font-weight: 400;
+    justify-content: space-between;
+    line-height: 15px;
+    margin: 0 8px 8px 0;
+    padding: 8px 12px;
+    
+}
+
+.filter-pill svg{
+    display: block;
+    margin-left: 12.6px;
+}
+
+.filter-pill-label{
+    color: #333;
+}
+
+.btnclearallfilter{
+    display: none;
+    background-color: var(--currentColor);
+    border: none;
+    border-radius: 5.4px;
+    box-shadow: inset 0 0 0 1px var(--filter-buttons);
+    color: var(--filter-buttons);
+    cursor: default;
+    font-family: bold;
+    font-size: 12px;
+    font-weight: 400;
+    justify-content: space-between;
+    line-height: 15px;
+    margin: 0 8px 8px 0;
+    padding: 8px 12px;
+}
 
 

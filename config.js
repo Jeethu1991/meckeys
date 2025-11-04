@@ -115,6 +115,10 @@ fetch('product.json')
         console.error('Error in fetch products:', error);
     });
     
+    hookActiveFilterRenderers();
+    renderActiveFilters();
+    toggleClearButton();
+    toggleBrandClearBtn();
 });
 
 function renderProducts(products) {
@@ -179,6 +183,233 @@ function renderProducts(products) {
 
     });
 }
+
+// ------------------------------------------ buttons for checkboxes, price, etc ---------------------------------------------------------
+
+const activeFiltersContainer = document.getElementById('activeFiltersContainer');
+const clearAllBtn = document.getElementById('btnclearallfilter');
+const DEFAULT_MIN = 3500;
+const DEFAULT_MAX = 13999;
+
+const pillSvg = '<svg fill="none" xmlns="http://www.w3.org/2000/svg" width="12" height="12" aria-hidden="true"><path d="M11 1 1 11M1 1l10 10" stroke="#767676" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>';
+
+function getActivefilters(){
+    const active = [];
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+        if (cb.checked){
+            let label = cb.value || cb.id || 'Filter';
+
+            const parent = cb.parentElement;
+            if(parent){
+                const span = parent.querySelector('span');
+                if(span && span.textContent && span.textContent.trim()) label = span.textContent.trim();                
+            }
+
+            active.push({ type: 'checkbox', key: (cb.dataset.filterKey || cb.value || cb.id), label});
+        }
+    });
+
+    document.querySelectorAll('input[type="radio"').forEach(r => {
+        if(r.checked && r.value && r.value.toLowerCase() !== 'any'){
+            let label = r.value;
+            const parent = r.parentElement;
+            if(parent){
+                const span = parent.querySelector('span');
+                if(span && span.textContent && span.textContent.trim()) label = span.textContent.trim();
+            }
+            active.push({ type: 'radio', key: (r.name + ':' + r.value), label});
+        }
+    });
+
+    const currentMin = parseInt(minRange.value);
+    const currentMax = parseInt(maxRange.value);
+
+    if(currentMin !== DEFAULT_MIN) {
+        active.push({ type:'price', 
+                      key: `price:${currentMin}-${currentMax}`, 
+                      label: `Price from: ₹${currentMin}`});
+    }
+    
+    if(currentMax !== DEFAULT_MAX){
+        active.push({type:'price', 
+                     key: `price:${currentMin}-${currentMax}`, 
+                     label: `Price to: ₹${currentMax}` })
+    }
+
+    const uniqueActive = [];
+    const seenKeys = new Set();
+    for(const f of active){
+        if(!seenKeys.has(f.key)){
+            seenKeys.add(f.key);
+            uniqueActive.push(f);
+        }
+    }
+
+    return uniqueActive;
+}
+
+function renderActiveFilters(){
+
+    if (!activeFiltersContainer) return;
+    activeFiltersContainer.innerHTML = '';
+
+    const active = getActivefilters();
+
+    const uniquefilters =  [];
+    const seenKeys = new Set();
+
+    for(const filter of active){
+        if(!seenKeys.has(filter.key)){
+            seenKeys.add(filter.key);
+            uniquefilters.push(filter);
+        }
+    }
+
+    uniquefilters.forEach(filter => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'filter-pill';
+        btn.dataset.filterType = filter.type;
+        btn.dataset.filterKey = filter.key;
+
+        btn.innerHTML = `<span class="filter-pill-label">${filter.label}</span>${pillSvg}`;
+        btn.addEventListener('click', () => {
+            removefilter(filter);
+        });
+        activeFiltersContainer.appendChild(btn);
+    });
+
+    if(clearAllBtn){
+        clearAllBtn.style.display = active.length > 1 ? 'inline-block' : 'none';
+    }
+
+    updateClearAllButtonVisibility();
+}
+
+function updateClearAllButtonVisibility(){
+    const activefilter = getActivefilters();
+    const activeCount = activefilter.length;
+    const clearAllBtn = document.getElementById('btnclearallfilter');
+
+    if(!clearAllBtn) return;
+
+    if(activeCount > 1){
+        clearAllBtn.style.display = 'block';
+    }
+    else{
+        clearAllBtn.style.display = 'none';
+    }
+}
+
+function removefilter(filter){
+    if(!filter) return;
+
+    if(filter.type === 'checkbox'){
+        const selectors = [
+            `input[type="checkbox"][value="${cssEscape(filter.key)}"]`,
+            `input[type="checkbox"]#${cssEscape(filter.key)}`
+        ];
+        const nodes = document.querySelectorAll(selectors.join(','));
+        if(nodes && nodes.length > 0){
+            nodes.forEach(n => { n.checked = false; });
+        }
+        else{
+            document.querySelectorAll('input[type="checked"]').forEach(cb => {
+                let lbl = cb.value || cb.id;
+                const parent = cb.parentElement;
+                if(parent){
+                    const span = parent.querySelector('span');
+                    if(span && span.textContent) lbl = span.textContent.trim();
+                }
+                if(lbl && lbl.toLowerCase() === filter.label.toLowerCase()) cb.checked = false;
+            });
+        }
+        if(typeof syncBrandFilters === 'function') syncBrandFilters();
+    }
+
+    else if(filter.type === 'radio'){
+        const parts = filter.key.split(':');
+        const name = parts[0];
+        const anyRadio = document.querySelector(`input[type="radio][name="${cssEscape(name)}"][value="Any"]`);
+        if(anyRadio) anyRadio.checked = true;
+        else{
+            document.querySelectorAll(`input[type="radio"][name="${cssEscape}]`).forEach(r => r.checked = false);
+        }
+    }
+
+    else if(filter.type === 'price'){
+        if(minRange && maxRange){
+            minRange.value = DEFAULT_MIN;
+            maxRange.value = DEFAULT_MAX;
+        }
+
+        if(minthumbprice && maxthumbprice){
+            minthumbprice.value = DEFAULT_MIN;
+            maxthumbprice.value = DEFAULT_MAX;
+        }
+
+        if(typeof updateSlider === 'function') updateSlider();
+        if(typeof priceupdateSlider === 'function') priceupdateSlider();
+    }
+
+    renderActiveFilters();
+    updateClearAllButtonVisibility();
+}
+
+function cssEscape(s){
+    if(!s) return '';
+    return String(s).replace(/([ #;&,.+*~':"!^$[\]()=>|\/@])/g, '\\$1');
+}
+
+function hookActiveFilterRenderers(){
+    document.querySelectorAll('input[type="checkbox"], input[type="radio"]').forEach(el => {
+        el.removeEventListener('change', renderActiveFilters);
+        el.addEventListener('change', () => {
+            setTimeout(() => {
+                renderActiveFilters();
+                updateClearAllButtonVisibility();
+            },0);
+        });
+    });
+
+    if(minRange) minRange.addEventListener('input', () => {
+        setTimeout(() => {
+            renderActiveFilters();
+            updateClearAllButtonVisibility();
+        },0);
+    });
+    
+    if(maxRange) maxRange.addEventListener('input', () => { 
+        setTimeout(() => {
+            renderActiveFilters();
+            updateClearAllButtonVisibility();
+        },0);
+    });
+    
+    if(minthumbprice) minthumbprice.addEventListener('input', () => { setTimeout(renderActiveFilters,0);});
+    if(maxthumbprice) maxthumbprice.addEventListener('input', () => { setTimeout(renderActiveFilters,0);});
+
+    if(clearAllBtn){
+        clearAllBtn.addEventListener('click', () => {
+            document.querySelectorAll('input[type="checkbox"],input[type="radio"]').forEach(i => i.checked = false);
+
+            if(minRange && maxRange) { minRange.value = DEFAULT_MIN; maxRange.value = DEFAULT_MAX; }
+            if(minthumbprice && maxthumbprice) { minthumbprice.value = DEFAULT_MIN; maxthumbprice.value = DEFAULT_MAX; }
+
+            if(typeof syncBrandFilters === 'function') syncBrandFilters();
+            if(typeof updateSlider === 'function') updateSlider();
+            if(typeof priceupdateSlider === 'function') priceupdateSlider();
+
+            renderActiveFilters();
+            if(typeof applyAllfilter === 'function') applyAllfilter();
+        });
+    }
+
+}
+
+hookActiveFilterRenderers();
+renderActiveFilters();
+
 
 // ------------------------------------------ All slider working---------------------------------------------------------
 function updateSlider(e){
@@ -299,14 +530,18 @@ document.getElementById('btnclearfilter').addEventListener('click', () => {
     document.getElementById('btnclearfilter').style.display = 'none';
     updateSlider();
     applyAllfilter();
+    renderActiveFilters();
+    updateClearAllButtonVisibility();
 });
 
 //For clear brand filter
 document.getElementById('btnbrandfilter').addEventListener('click', () => {
-    document.querySelectorAll('.brandslistfilter input[type="checkbox"], .brandslist input[type="checkbox"]').forEach(input => input.checked = false);
+    document.querySelectorAll('.brandslistfilter input[type="checkbox"]:checked, .brandslist input[type="checkbox"]:checked').forEach(input => input.checked = false);
     document.getElementById('btnbrandfilter').style.display = 'none';
     syncBrandFilters();
     applyAllfilter();
+    renderActiveFilters();
+    updateClearAllButtonVisibility();
 });
 
 //For clear price filter
@@ -320,6 +555,8 @@ document.getElementById('btnpricefilter').addEventListener('click', () => {
     document.getElementById('btnpricefilter').style.display = 'none';
     updateSlider();
     applyAllfilter();
+    renderActiveFilters();
+    updateClearAllButtonVisibility();
 });
 
 const brandClearBtn = document.getElementById('btnbrandfilter');
