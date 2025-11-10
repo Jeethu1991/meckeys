@@ -1,0 +1,115 @@
+let allProducts = [];
+let filteredProducts = [];
+const container = document.getElementById("keyboardlist");
+
+// Fetch product data
+document.addEventListener("DOMContentLoaded", () => {
+  fetch("product.json")
+    .then(res => res.json())
+    .then(data => {
+      allProducts = data;
+      filteredProducts = data;
+      renderProducts(filteredProducts);
+      setupFilters();
+    });
+});
+
+// Render products dynamically
+function renderProducts(products) {
+  container.innerHTML = "";
+  
+  if (products.length === 0) {
+    container.innerHTML = `<p class="no-products">No products found.</p>`;
+    return;
+  }
+
+  products.forEach(product => {
+    const outOfStock = product.stock === "outofstock";
+    const item = document.createElement("div");
+    item.classList.add("product-card");
+
+    item.innerHTML = `
+      <div class="product-image">
+        <img src="${product.image}" alt="${product.name}">
+        ${outOfStock ? `<div class="outofstock-strip">Out of Stock</div>` : ""}
+      </div>
+      <div class="product-info">
+        <h3>${product.name}</h3>
+        <p>${product.brand}</p>
+        <p>${product.size}</p>
+        <p>${product.wired}</p>
+        <p class="price">${getPrice(product.price)}</p>
+      </div>
+    `;
+    container.appendChild(item);
+  });
+}
+
+// Helper for price display
+function getPrice(price) {
+  if (typeof price === "object") {
+    if (price.discounted) return price.discounted;
+    if (price.min && price.max) return `${price.min} - ${price.max}`;
+    return price.actual || "";
+  }
+  return price || "";
+}
+
+// Filter logic
+function setupFilters() {
+  const filterGroups = document.querySelectorAll(".filter-group");
+
+  filterGroups.forEach(group => {
+    const header = group.querySelector(".filter-header");
+    const options = group.querySelector(".filter-options");
+
+    header.addEventListener("click", () => {
+      // Close other open filters
+      document.querySelectorAll(".filter-group").forEach(g => {
+        if (g !== group) g.classList.remove("active");
+      });
+      group.classList.toggle("active");
+    });
+
+    options.querySelectorAll("input").forEach(input => {
+      input.addEventListener("change", applyFilters);
+    });
+  });
+
+  const clearBtn = document.getElementById("btnclear");
+  if (clearBtn) clearBtn.addEventListener("click", clearAllFilters);
+}
+
+function applyFilters() {
+  const selected = {
+    wired: getSelectedValues("wired"),
+    size: getSelectedValues("size"),
+    brand: getSelectedValues("brand"),
+    keyswitches: getSelectedValues("keyswitches"),
+    keycaps: getSelectedValues("keycaps")
+  };
+
+  filteredProducts = allProducts.filter(product => {
+    return (
+      (selected.wired.length === 0 || selected.wired.includes(product.wired)) &&
+      (selected.size.length === 0 || selected.size.includes(product.size)) &&
+      (selected.brand.length === 0 || selected.brand.includes(product.brand)) &&
+      (selected.keyswitches.length === 0 || selected.keyswitches.includes(product.keyswitches)) &&
+      (selected.keycaps.length === 0 || selected.keycaps.includes(product.keycaps.material))
+    );
+  });
+
+  renderProducts(filteredProducts);
+}
+
+function getSelectedValues(name) {
+  return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(
+    input => input.value
+  );
+}
+
+function clearAllFilters() {
+  document.querySelectorAll(".filter-group input").forEach(input => (input.checked = false));
+  filteredProducts = allProducts;
+  renderProducts(filteredProducts);
+}
