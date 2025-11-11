@@ -286,13 +286,13 @@ body {
 .slash1 {
     padding: 0 8px;
     color: var(--cartCounttext);
-    font-size: 10px;
+    font-size: 16px;
     white-space: nowrap;
     text-align: left;
     line-height: 1em;
     letter-spacing: 0px;
     font-family: font5;
-    font-weight: 600;
+    font-weight: 400;
     padding-left: 6px;
     padding-right: 5px;
 }
@@ -300,13 +300,13 @@ body {
 .slash2 {
     padding: 0 8px;
     color: var(--cartCounttext);
-    font-size: 10px;
+    font-size: 16px;
     white-space: nowrap;
     text-align: left;
     line-height: 1em;
     letter-spacing: 0px;
     font-family: font5;
-    font-weight: 600;
+    font-weight: 400;
     padding-left: 6px;
     padding-right: 9px;
 }
@@ -466,7 +466,7 @@ footer {
     flex-direction: row;
     gap: 20px;
     justify-content: flex-start;
-    padding-top: 7px;
+    padding-top: 8px;
 }
 
 .contact_icons img {
@@ -494,9 +494,9 @@ footer {
     display: inline-block;
     border-radius: 5px;
     background: var(--link-background);
-    padding: 0 5px 0px;
+    padding: 3px 5px 5px;
     margin: 1px;
-
+    height: 25px;
 }
 
 .visa svg,
@@ -509,7 +509,6 @@ footer {
     height: 15px;
     fill: var(--link-colors);
     text-align: left;
-
     font-size: 12px;
     line-height: 1em;
     letter-spacing: 0px;
@@ -610,7 +609,7 @@ footer {
     padding: 8px;
 }
 
-.filter{
+.filter {
     overflow: hidden;
 }
 
@@ -1298,11 +1297,24 @@ input[type="range"]::-webkit-slider-thumb {
     right: 0;
     z-index: 10;
     padding-left: 8px;
+    /* padding-inline: 18px; */
+}
+
+.btnproducts1 {
+    bottom: 0;
+    padding: 16px 0px;
+    background-color: var(--currentColor);
+    left: 0;
+    position: absolute;
+    right: 0;
+    z-index: 10;
+    padding-left: 8px;
+    padding-inline: 18px;
 }
 
 .btnseeproducts {
-    background-color: var(--brandlist-color);
-    border: 1px solid var(--brandlist-color);
+    background-color: var(--filter-buttons);
+    /* border: 1px solid transparent; */
     border-radius: 6px;
     color: var(--currentColor);
     font-size: 14px;
@@ -1316,6 +1328,7 @@ input[type="range"]::-webkit-slider-thumb {
     position: relative;
     letter-spacing: 0px;
     font-family: font5;
+    height: 36.33px;
 }
 
 /* ---------------------------------------------- Filter brands button --------------------------------------------- */
@@ -1663,9 +1676,12 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .btnpriceproducts {
-    position: relative;
-    bottom: -288px;
-    padding-left: 8px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-inline: 18px;
+    padding-bottom: 16px;
 }
 
 .btnproductsprice {
@@ -1811,19 +1827,19 @@ input[type="range"]::-webkit-slider-thumb {
     display: none;
 }
 
-.closeicon{
+.closeicon {
     display: none;
 }
 
-.filtersmall{
+.filtersmall {
     display: none;
 }
 
-.wrappermenulist{
+.wrappermenulist {
     display: none;
 }
 
-.filter{
+.filter {
     position: fixed;
     top: 0;
     left: -100%;
@@ -1834,8 +1850,12 @@ input[type="range"]::-webkit-slider-thumb {
     transition: left .3s ease;
 }
 
-.filter.active{
+.filter.active {
     left: 0;
+}
+
+.linksbottom {
+    display: none;
 }
 
 @media screen and (min-width: 425px) {
@@ -1847,11 +1867,11 @@ input[type="range"]::-webkit-slider-thumb {
 
 @media screen and (min-width: 768px) {
 
-    .filterbuttons{
+    .filterbuttons {
         display: none !important;
     }
 
-    .cart{
+    .cart {
         padding: 0 10px;
     }
 
@@ -1861,24 +1881,24 @@ input[type="range"]::-webkit-slider-thumb {
         padding: 3px 3.2px 4px;
     }
 
-    .newaccount{
+    .newaccount {
         margin-right: 2px;
         margin-bottom: 0;
     }
 
-    .search{
+    .search {
         padding-right: 3px;
     }
 
-    .arrowicon{
+    .arrowicon {
         display: none;
     }
 
-    .filterpannal.active{
+    .filterpannal.active {
         width: 50%;
     }
 
-    .closeicon{
+    .closeicon {
         padding: 8px;
     }
 
@@ -1886,7 +1906,7 @@ input[type="range"]::-webkit-slider-thumb {
         margin: 0 15px;
     }
 
-    .filtersmall{
+    .filtersmall {
         display: flex;
         flex-wrap: wrap;
         gap: 8px;
@@ -1895,7 +1915,7 @@ input[type="range"]::-webkit-slider-thumb {
         padding-top: 10px;
     }
 
-    .filterbtn{
+    .filterbtn {
         background: var(--currentColor);
         border: 1px solid var(--cartCounttext);
         border-radius: 6px;
@@ -1909,7 +1929,7 @@ input[type="range"]::-webkit-slider-thumb {
         margin-bottom: 8px;
     }
 
-    .filterbtn.active{
+    .filterbtn.active {
         border-color: #000;
         font-weight: 600;
         outline-color: var(--cartCounttext);
@@ -1917,13 +1937,13 @@ input[type="range"]::-webkit-slider-thumb {
         outline-width: 2px;
     }
 
-    .filter-pannal{
+    .filter-pannal {
         display: none;
         position: absolute;
         background: var(--currentColor);
         border: 1px solid var(--link-background);
         border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         min-width: 180px;
         z-index: 1000;
         border: 1px solid #d9d9d9;
@@ -1933,36 +1953,43 @@ input[type="range"]::-webkit-slider-thumb {
         z-index: 99995;
     }
 
-    .filter-pannal.show{
+    .filter-pannal.show {
         display: block;
     }
 
-    .filter-pannal label, .filter-pannal li{
+    .filter-pannal label,
+    .filter-pannal li {
         font-size: 13px;
         line-height: 1.6em;
         display: flex;
         justify-content: space-between;
-        align-items: center;        
+        align-items: center;
     }
 
-    .filter-pannal li{
+    .filter-pannal li {
         padding: 0 0 7.5px;
     }
 
-    .dropdown-arrow{
+    .dropdown-arrow {
         margin-bottom: 15px;
         padding: 4px;
     }
 
-    .numbr{
+    .numbr {
         margin-left: 72.6042px;
     }
 
-    .pricebarslider{
+    .pricebarslider {
         margin-top: 10px;
     }
 
-    .labelminmaxprice input{
+    .labelminmaxprice {
+        margin-top: -38px;
+        /* padding-top: 1px; */
+        margin-left: -15px;
+    }
+
+    .labelminmaxprice input {
         margin-top: 10px;
         padding: 5px;
         width: 45%;
@@ -1970,7 +1997,7 @@ input[type="range"]::-webkit-slider-thumb {
         border-radius: 6px;
     }
 
-    #price-filter{
+    #price-filter {
         padding: 12px 24px 16px;
     }
 
@@ -1981,42 +2008,54 @@ input[type="range"]::-webkit-slider-thumb {
         margin-bottom: 60px;
     }
 
+    .filtercontent {
+        padding-left: 0px;
+    }
+
+    .filtercontent h3 {
+        font-size: 19.95px;
+        line-height: 26.5335px;
+    }
+
+    .filtercontent span {
+        line-height: 22.6px;
+        font-size: 15px;
+    }
+
 }
 
-/* @media screen and (min-width: 959px) {
+@media screen and (min-width: 959px) {
 
-    .filterbuttons, .filtersmall{
-        display: flex;
-    }
-
-    .filter{
-        display: none;
-    }
-
-    .filterpannal{
+    .filterpannal {
         padding: 0 15px;
     }
 
-
-} */
+}
 
 @media screen and (min-width: 960px) {
-    #keyboardlist{
+    .search {
+        padding-right: 8px;
+        padding-top: 2px;
+    }
+
+    #keyboardlist {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         grid-gap: 40px 30px;
         margin-bottom: 60px;
     }
 
-    .mainbody{
+    .mainbody {
         display: flex;
         flex-direction: row-reverse;
         align-items: flex-start;
+        max-width: 1170px;
+        margin-inline: auto;
     }
 
-    .filter{
+    .filter {
         position: relative;
-        width: 300px; 
+        width: 300px;
         height: auto;
         background: transparent;
         z-index: auto;
@@ -2027,10 +2066,29 @@ input[type="range"]::-webkit-slider-thumb {
 
     .main_content {
         flex: 1;
-        width: auto;
+        margin-bottom: 70px;
+        margin-top: 60px;
     }
 
-    .filterpannal, .filterpannal.active{
+    .product {
+        margin-bottom: 14px;
+    }
+
+    .product img {
+        height: 129.333px;
+        width: 194px;
+    }
+
+    .price {
+        margin-bottom: 0;
+    }
+
+    .rating {
+        bottom: 98px;
+    }
+
+    .filterpannal,
+    .filterpannal.active {
         position: relative;
         left: 0 !important;
         width: 100%;
@@ -2039,33 +2097,99 @@ input[type="range"]::-webkit-slider-thumb {
         transition: none;
     }
 
-    .filterpannal{
+    .filterpannal {
         display: block;
+        z-index: unset;
     }
 
-    .filterbuttons, .filtersmall{
+    .filterbuttons,
+    .filtersmall {
         display: none;
     }
 
-    .bodytext{
+    .bodytext {
         justify-content: space-between;
         flex-direction: row;
-    }    
+        margin-bottom: 32px;
+    }
 
-    .brands, .pricefilterbtn, .filtersmall{
+    .numbr{
+        font-size: 15px;
+    }
+
+    .connectivity ul{
+        padding-right: 30px;
+        padding-top: 14px;
+    }
+
+    .connectivity span{
+        padding-left: 8.9px;
+    }
+
+    .brands,
+    .pricefilterbtn,
+    .filtersmall {
         display: none;
     }
 
-    .btnproducts{
+    .brandslist ul {
+        padding-right: 30px;
+        padding-top: 14px;
+    }
+
+    .brand1 span, .brand2 span, .brand3 span, .brand4 span, .brand5 span, .brand6 span, .brand7 span {
+        padding-left: 9px;
+    }
+
+    .size{
+        padding-top: 11px;
+    }
+
+    .size ul{
+        padding-right: 30px;
+        padding-top: 12px;
+    }
+
+    .size li{
+        padding-bottom: 7.5px;
+    }
+
+    .size1 span, .size2 span, .size3 span, .size4 span, .size5 span {
+        padding-left: 8.9px;
+    }
+
+    .keyswitches{
+        padding-bottom: 16px;
+    }
+
+    .keyswitches ul{
+        padding-right: 30px;
+        padding-top: 12px;
+    }
+
+    #num1{
+        position: relative;
+        left: -10px;
+    }
+
+    .keycaps{
         display: none;
     }
 
-    .resetclear{
+    .btnproducts {
         display: none;
     }
 
-    .filtercontent{
-        padding-top: 60px;
+    .resetclear {
+        display: none;
+    }
+
+    .filtercontent {
+        padding-top: 52px;
+    }
+
+    .filtercontent span{
+        white-space: nowrap;
     }
 
     .filter .pricebars,
@@ -2074,28 +2198,49 @@ input[type="range"]::-webkit-slider-thumb {
     .filter .pricebarslider,
     .filter .labelminmax {
         width: 100%;
-        max-width: 240px;   /* ✅ adjust this to fit inside your filter column */
-        margin: 0 auto;     /* ✅ center it inside filter column */
+        max-width: 240px;
+        /* ✅ adjust this to fit inside your filter column */
+        margin: 0 auto;
+        /* ✅ center it inside filter column */
     }
 
     .filter .pricebars {
         display: flex;
         gap: 2px;
         overflow: hidden;
+        position: relative;
+        right: 18px;
     }
 
     .filter .pricebar input[type=range] {
         width: 100%;
     }
 
-    .menu{
+    .menu {
         display: none;
     }
 
     .filter .pricebar {
-        max-width: 220px !important;   /* ✅ adjust this number */
+        max-width: 220px !important;
+        /* ✅ adjust this number */
         width: 100% !important;
         overflow: hidden !important;
+        position: relative;
+        left: -16px;
+    }
+
+    .list1,.list2, .list3, .list4,
+    .list5,.list6,.list7,.list8 {
+        padding-bottom: 7.5px;
+    }
+
+    .list8{
+        line-height: 22.6px;
+        font-size: 15px;
+    }
+
+    .brandslist {
+        padding-top: 17px;
     }
 
     /* LIMIT internal line width even if JS sets inline width */
@@ -2115,29 +2260,28 @@ input[type="range"]::-webkit-slider-thumb {
         overflow: hidden;
     }
 
-    .labelminmax{
+    .labelminmax {
         overflow: hidden;
         position: relative;
         right: 17px;
         bottom: -6px;
     }
 
-    .lblmin{
+    .lblmin {
         position: relative;
-        
     }
 
-    .lblmax{
-        text-align:justify;
-        width:46.9271px;
+    .lblmax {
+        text-align: justify;
+        width: 46.9271px;
     }
 
-    .wrappermenulist{
+    .wrappermenulist {
         display: flex;
         flex-direction: row;
     }
 
-    .wrappermenulist div{
+    .wrappermenulist div {
         display: block;
         color: var(--currentColor);
         font-family: font1;
@@ -2147,24 +2291,215 @@ input[type="range"]::-webkit-slider-thumb {
         font-weight: 500;
         align-items: center;
         padding: 0 4px;
-        margin: 0 10px;
     }
 
-    .menuearrow{
-        width:fit-content;
+    .menuearrow {
+        width: fit-content;
     }
 
-    .menuearrow svg{
+    .menuearrow svg {
         width: 7px;
     }
 
-    .menu1, .menu4{
+    .menu1,
+    .menu4 {
         display: flex !important;
         flex-direction: row;
         overflow: nowrap;
     }
 
-    .wrapper{
+    .menu1 {
+        margin-right: 17px;
+        margin-top: 3px;
+    }
+
+    .menu2 {
+        margin-top: 3px;
+    }
+
+    .menu3 {
+        margin-left: 20px;
+        margin-right: 16px;
+        margin-top: 3px;
+    }
+
+    .menu4 {
+        margin-left: 4px;
+        margin-right: 17px;
+        margin-top: 2px;
+    }
+
+    .menu5 {
+        margin-right: 31px;
+        margin-top: 3px;
+    }
+
+    .wrapper {
         max-height: 60px;
     }
+
+    .footer_links div{
+        margin: 8px 0;
+    } 
+
+    .footer_links span {
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        letter-spacing: normal;
+        line-height: 1.2;
+        text-align: left;
+        font-family: font5;
+    }
+
+    .links {
+        opacity: 0;
+    }
+
+    .contactus{
+        padding-bottom: 14px;
+        padding-top: 10.5px;
+    }
+
+    .contactus h3{
+        font-size: 14px;
+    }
+
+    .linksbottom {
+        display: block;
+        padding-top: 8px;
+        padding-bottom: 5px;
+        display: flex;
+        justify-content: end;
+        margin-right: 12px;
+    }
+
+    .visa svg, .marstercard svg, .amazon svg, .google_pay svg, .Cash_on_delivery svg {
+        transform: translateY(-3.4px);
+    }
+
+    .txtfooter p{
+        font-size: 14px;
+        padding-bottom: 10px;
+    }
+
+    .contact_icons{
+        padding-bottom: 1px;
+        padding-top: 10px;
+    }
+
+    .linksbottom div {
+        margin: 3px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+
+    
+    .txtfootarion{
+        transform: translateY(2.4px);
+    }
+
+    .enquiry{
+        transform: translateX(44px);
+    }
+
+    .termsconditions{
+        transform: translateX(11px);
+    }
+
+    .footer_links{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 90px;
+        white-space: nowrap;
+    }
+
+    .footerdisplay{
+        display: flex;
+        flex-direction: row;
+        gap: 78px;
+        max-width: 1140px;
+        margin-inline: auto;
+    }
+
+    .links{
+        display: none;
+    }
+
+    .contact_icons img{
+        width: 21px;
+        height: 22px;
+    }
+
+    .txtfooter p{
+        padding-bottom: 0;
+        padding-top: 2px;
+    }
+
+    .footerimage{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 23px;
+        max-width: 1140px;
+        margin-inline: auto;
+    }
+
+    .linksbottom{
+        display: grid;
+        grid-template-columns: repeat(4);
+        gap: 0px;
+    }
+
+    .linksbottom div{
+        width: 40px;
+    }
+
+    .linksbottom div:nth-child(4){
+        width:47.58px
+    }
+
+    .linksbottom div:nth-child(5){
+        grid-column: 4;
+        transform: translateX(8px);
+    }
+    
+}
+
+@media screen and (min-width: 1047px){
+    .linksbottom{
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    
+    .footerimage{
+        padding-bottom: 4px;
+        padding-top: 28px;
+        max-width: 1170px;
+    }
+
+    .linksbottom div:nth-child(5){
+        
+        transform: translateX(0px);
+    }
+
+    .footerdisplay {
+        gap: 110px;
+        max-width: 1170px;
+        justify-self: center;
+        margin-inline: 0px;
+    }
+
+    .footer_links{
+        gap: 127px;
+    }
+
+
+
+
 }
