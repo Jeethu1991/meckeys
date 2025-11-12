@@ -2067,10 +2067,13 @@ input[type="range"]::-webkit-slider-thumb {
     .outerwrapper{
         max-width: 100%;
         background-color: var(--cartCounttext);
+        position: sticky;
+        top: 0;
+        z-index: 999999999;
     }
 
     .wrapper{
-        max-width: 1140px;
+        max-width: 1170px;
         margin-inline: auto;
     }
 
@@ -2084,6 +2087,10 @@ input[type="range"]::-webkit-slider-thumb {
         grid-template-columns: repeat(3, 1fr);
         grid-gap: 40px 30px;
         margin-bottom: 60px;
+    }
+
+    .newaccount{
+        padding-right: 6px;
     }
 
     .mainbody {
@@ -2120,12 +2127,20 @@ input[type="range"]::-webkit-slider-thumb {
         width: 194px;
     }
 
+    .contact_icons img{
+        width: 21px;
+        object-fit: fill;
+        height: 22px;
+        /* max-width: auto; */
+    }
+
     .price {
         margin-bottom: 0;
     }
 
     .rating {
         bottom: 98px;
+        right: 25px;
     }
 
     .filterpannal,
@@ -2438,7 +2453,7 @@ input[type="range"]::-webkit-slider-thumb {
 
     
     .txtfootarion{
-        transform: translateY(2.4px);
+        transform: translateY(3px);
     }
 
     .enquiry{
@@ -2446,7 +2461,7 @@ input[type="range"]::-webkit-slider-thumb {
     }
 
     .termsconditions{
-        transform: translateX(11px);
+        transform: translateX(10px);
     }
 
     .footer_links{
@@ -2455,6 +2470,14 @@ input[type="range"]::-webkit-slider-thumb {
         gap: 90px;
         white-space: nowrap;
     }
+
+    /* .termsconditions{
+        margin-left: -1px;
+    } */
+
+    /* .contactus{
+        transform: translateX(1px);
+    } */
 
     .footerdisplay{
         display: flex;
