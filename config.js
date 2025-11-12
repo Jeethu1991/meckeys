@@ -11,7 +11,7 @@ const inStockCheckbox = document.getElementById('instock');
 const outOfStockCheckbox = document.getElementById('outofstock');
 const stockAny = document.getElementById('Any');
 const brandCheckboxes = document.querySelectorAll('.brandslist input[type="checkbox"], .filtersmall [data-filter="brand"] input[type="checkbox"]');
-const sizeCheckboxes = document.querySelectorAll('.size input[type="checkbox"], .filtersmall [data-filter="size"] input[type="checkbox"');
+const sizeCheckboxes = document.querySelectorAll('.size input[type="checkbox"], .filtersmall [data-filter="size"] input[type="checkbox"]');
 const connectivity = document.querySelectorAll('.connectivity input[type="checkbox"], .filtersmall [data-filter="connectivity"] input[type="checkbox"]');
 const keyswitches = document.querySelectorAll('.keyswitches input[type="checkbox"], .filtersmall [data-filter="keyswitches"] input[type="checkbox"]');
 const keycapCheckbox = document.querySelectorAll('.keycaps input[type="checkbox"]');
@@ -35,6 +35,12 @@ const priceslider = document.getElementById('pricebarslider');
 const loadpage = document.getElementById('keyboardlist');
 const closeicon = document.querySelector('.closeicon');
 const smallfilter = document.querySelector('.m_btnfilter');
+const smallminthumbprice = document.getElementById('smallminthumbprice');
+const smallmaxthumbprice = document.getElementById('smallmaxthumbprice');
+const smallpricemin = document.getElementById('smallpricelblmin');
+const smallpricemax = document.getElementById('smallpricelblmax');
+const smallpricelinefilter = document.getElementById('smallpricelineprice');
+const smallfilterpannal = document.getElementById('filtersmall');
 const minGap = 500;
 
 loadpage.classList.add('loading');
@@ -110,6 +116,21 @@ document.addEventListener('DOMContentLoaded', () => {
                     filterSlide.classList.remove('active');
                 });
             }
+
+            // ---------- Scroll top with arrow ---------------
+            const scrollBtn = document.getElementById('scrolltop');
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    scrollBtn.classList.add('show');
+                } else {
+                    scrollBtn.classList.remove('show');
+                }
+            });
+            scrollBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
             // ------------------------------------------------
             const allFilterBtn = document.getElementById("btnfilter");     // desktop
             const mAllFilterBtn = document.getElementById("m_btnfilter");  // mobile
@@ -197,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     panel.style.minWidth = btnRect.width + "px";
 
                     const arrow = panel.querySelector('.dropdown-arrow');
-                    if(arrow){
+                    if (arrow) {
                         arrow.style.left = (btnRect.width / 2 - 7) + "px";
                     }
                 });
@@ -215,11 +236,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             });
 
-            document.querySelectorAll('.filtersmall .filter-pannal input[type="checkbox"]').forEach(cd => {
+            document.querySelectorAll('.filtersmall .filter-pannal input[type="checkbox"]').forEach(cb => {
+                cb.addEventListener('click', e => {
+                    e.stopPropagation();
+                });
+
                 cb.addEventListener('change', () => {
                     applyAllfilter();
                     renderActiveFilters();
                     toggleClearButton();
+                    // toggleBrandClearBtn();
                     syncBrandFilters();
                 });
             });
@@ -232,18 +258,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     loadpage.classList.remove('loading');
     hookActiveFilterRenderers();
+    bindFilterEvents();
     renderActiveFilters();
     toggleClearButton();
     toggleBrandClearBtn();
 
 });
 
+// Allow checkboxes and radio to toggle naturally
+function bindFilterEvents() {
+    document.querySelectorAll('.filtercontent input[type="checkbox"], .filtercontent input[type="radio"]').forEach(cb => {
+        cb.addEventListener('click', e => e.stopPropagation()); // stopPropogation is used to keep the click local to the checkbox
+        cb.addEventListener('change', () => {
+            applyAllfilter();
+            renderActiveFilters();
+            toggleClearButton();
+        });
+    });
+}
 // ------------------------------------------ Small DropDown Click Close  ---------------------------------------------------------
-
 document.querySelectorAll('.dropdown-arrow').forEach(arrow => {
-    arrow.addEventListener('click', function(e) {
+    arrow.addEventListener('click', function (e) {
         const panel = this.closest('.filter-pannal');
-        if(panel){
+        if (panel) {
             panel.classList.remove('show');
         }
     });
@@ -334,7 +371,7 @@ function getActivefilters() {
         }
     });
 
-    document.querySelectorAll('input[type="radio"').forEach(r => {
+    document.querySelectorAll('input[type="radio"]').forEach(r => {
         if (r.checked && r.value && r.value.toLowerCase() !== 'any') {
             let label = r.value;
             const parent = r.parentElement;
@@ -439,8 +476,8 @@ function removefilter(filter) {
             nodes.forEach(n => { n.checked = false; });
         }
         else {
-            document.querySelectorAll('input[type="checked"]').forEach(cb => {
-                let lbl = cb.value || cb.id;
+            document.querySelectorAll('input[type="checkbox"]:checked').forEach(cb => {
+                let lbl = cb.value || cb.id || '';
                 const parent = cb.parentElement;
                 if (parent) {
                     const span = parent.querySelector('span');
@@ -457,7 +494,7 @@ function removefilter(filter) {
         const anyRadio = document.querySelector(`input[type="radio][name="${cssEscape(name)}"][value="Any"]`);
         if (anyRadio) anyRadio.checked = true;
         else {
-            document.querySelectorAll(`input[type="radio"][name="${cssEscape}]`).forEach(r => r.checked = false);
+            document.querySelectorAll(`input[type="radio"][name="${cssEscape(name)}]`).forEach(r => r.checked = false);
         }
     }
     else if (filter.type === 'price') {
@@ -469,6 +506,11 @@ function removefilter(filter) {
         if (minthumbprice && maxthumbprice) {
             minthumbprice.value = DEFAULT_MIN;
             maxthumbprice.value = DEFAULT_MAX;
+        }
+
+        if (smallminthumbprice && smallmaxthumbprice) {
+            smallminthumbprice.value = DEFAULT_MIN;
+            smallmaxthumbprice.value = DEFAULT_MAX;
         }
 
         if (typeof updateSlider === 'function') updateSlider();
@@ -516,6 +558,8 @@ function hookActiveFilterRenderers() {
 
             if (minRange && maxRange) { minRange.value = DEFAULT_MIN; maxRange.value = DEFAULT_MAX; }
             if (minthumbprice && maxthumbprice) { minthumbprice.value = DEFAULT_MIN; maxthumbprice.value = DEFAULT_MAX; }
+
+            if (smallminthumbprice && smallmaxthumbprice) { smallminthumbprice.value = DEFAULT_MIN; smallminthumbprice = DEFAULT_MAX; }
 
             if (typeof syncBrandFilters === 'function') syncBrandFilters();
             if (typeof updateSlider === 'function') updateSlider();
@@ -579,14 +623,15 @@ function priceupdateSlider(e) {
     let minVal = parseInt(minthumbprice.value);
     let maxVal = parseInt(maxthumbprice.value);
 
-    if (maxVal - minVal < minGap) {
-        if (e && e.target.id === "minthumbprice") {
+    if (maxVal - minVal < minGap){
+        if (e && e.target.id === "minthumbprice"){
             minthumbprice.value = maxVal - minGap;
             minVal = maxVal - minGap;
         }
-        else if (e && e.target.id === "maxthumbprice") {
+        else if (e && e.target.id === "maxthumbprice"){
             maxthumbprice.value = minVal + minGap;
             maxVal = minVal + minGap;
+            
         }
     }
     const sliderWidth = priceslider.offsetWidth;
@@ -622,6 +667,37 @@ function priceupdateSlider(e) {
 }
 minthumbprice.addEventListener("input", priceupdateSlider);
 maxthumbprice.addEventListener("input", priceupdateSlider);
+
+function smallPriceUpdateSlider() {
+    const minVal = parseInt(smallminthumbprice.value);
+    const maxVal = parseInt(smallmaxthumbprice.value);
+
+    // Prevent overlap
+    if (maxVal - minVal < 1000) {
+        if (event.target.id === 'smallminthumbprice') {
+            smallminthumbprice.value = maxVal - 1000;
+        } else {
+            smallmaxthumbprice.value = minVal + 1000;
+        }
+    }
+
+    // Update displayed labels
+    smallpricemin.textContent = `₹${smallminthumbprice.value}`;
+    smallpricemax.textContent = `₹${smallmaxthumbprice.value}`;
+
+    // Update the slider line visual
+    const percentMin = ((smallminthumbprice.value - 3500) / (13999 - 3500)) * 100;
+    const percentMax = ((smallmaxthumbprice.value - 3500) / (13999 - 3500)) * 100;
+    smallpricelinefilter.style.left = percentMin + '%';
+    smallpricelinefilter.style.right = (100 - percentMax) + '%';
+
+    // Apply all filters
+    applyAllfilter();
+}
+
+smallminthumbprice.addEventListener("input", smallPriceUpdateSlider);
+smallmaxthumbprice.addEventListener("input", smallPriceUpdateSlider);
+
 // ------------------------------------------ To clear in all filter buttons---------------------------------------------------------
 // for clear button
 document.getElementById('btnclearfilter').addEventListener('click', () => {
@@ -658,6 +734,9 @@ document.getElementById('btnpricefilter').addEventListener('click', () => {
 
     if (minthumbprice) pricemin.value = "min.";
     if (maxthumbprice) pricemax.value = "max.";
+
+    // if (smallminthumbprice) smallpricemin.value = "min.";
+    // if (smallmaxthumbprice) smallpricemax.value = "max.";
 
     document.getElementById('btnpricefilter').style.display = 'none';
     updateSlider();
@@ -698,10 +777,18 @@ if (priceClearBtn) {
             maxthumbprice.value = defaultmax;
         }
 
+        // if (smallminthumbprice && smallmaxthumbprice) {
+        //     smallminthumbprice.value = DEFAULT_MIN;
+        //     smallmaxthumbprice.value = DEFAULT_MAX;
+        // }
+
+
         if (minPrice) minPrice.textContent = `₹${defaultMin}`;
         if (maxPrice) maxPrice.textContent = `₹${defaultmax}`;
         if (pricemin) pricemin.textContent = `₹${defaultMin}`;
         if (pricemax) pricemax.textContent = `₹${defaultmax}`;
+        // if (smallpricemin) smallpricemin.textContent = `₹${defaultMin}`;
+        // if (smallpricemax) smallpricemax.textContent = `₹${defaultmax}`;
 
         priceClearBtn.style.display = 'none';
 
@@ -765,14 +852,21 @@ function toggleClearButton() {
 // ------------------------------------------ Apply all changes happening in all the filters ---------------------------------------------------------
 function applyAllfilter() {
     let min, max;
-    if (pricepannal.classList.contains('active')) {
+
+    // if ((pricepannal.classList.contains('active')) || (smallfilterpannal.classList.contains('active'))) {
+    if (pricepannal && pricepannal.classList.contains('active')) {
         min = parseInt(pricemin.value.replace(/[₹,]/g, '')) || 0;
         max = parseInt(pricemax.value.replace(/[₹,]/g, '')) || Infinity;
+    }
+    else if (smallfilterpannal.classList.contains('active')) {
+        min = parseInt(smallpricemin.value.replace(/[₹,]/g, '')) || 0;
+        max = parseInt(smallpricemax.value.replace(/[₹,]/g, '')) || Infinity;
     }
     else {
         min = parseInt(minPrice.value.replace(/[₹,]/g, '')) || 0;
         max = parseInt(maxPrice.value.replace(/[₹,]/g, '')) || Infinity;
     }
+
     const showInStock = inStockCheckbox.checked;
     const showOutofstock = outOfStockCheckbox.checked;
     let selectedstock = 'any';
@@ -840,23 +934,10 @@ function applyAllfilter() {
         return inPriceRange && inStockFilter && inBrandFilter && sizesfrom && connection && inswitches && keycapslist;
     });
 
+    // bindFilterEvents();
     renderProducts(filtered);
 }
-// ------------------------------------------ Scroll top with arrow ---------------------------------------------------------
-document.addEventListener('DOMContentLoaded', () => {
-    const scrollBtn = document.getElementById('scrolltop');
 
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            scrollBtn.classList.add('show');
-        } else {
-            scrollBtn.classList.remove('show');
-        }
-    });
-    scrollBtn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-});
 // ------------------------------------------ Event listeners for all the buttons, checkboxes, radiobuttons, and sliders ---------------------------------------------------------
 minRange.addEventListener('input', applyAllfilter);
 maxRange.addEventListener('input', applyAllfilter);
@@ -871,7 +952,9 @@ keycapCheckbox.forEach(chk => chk.addEventListener('change', () => { applyAllfil
 filterbrandchkbox.forEach(chk => chk.addEventListener('change', () => { syncBrandFilters('brand'); toggleBrandClearBtn(); toggleClearButton(); applyAllfilter(); }));
 minthumbprice.addEventListener('input', applyAllfilter);
 maxthumbprice.addEventListener('input', applyAllfilter);
+smallminthumbprice.addEventListener('input', applyAllfilter);
+smallmaxthumbprice.addEventListener('input', applyAllfilter);
 slider.addEventListener('input', () => { applyAllfilter(); toggleClearButton(); });
 priceslider.addEventListener('input', () => { applyAllfilter(); toggleClearButton(); });
 document.querySelectorAll('.brandslist input[type="checkbox"]').forEach(chk => { chk.addEventListener('change', () => { syncBrandFilters(); toggleBrandClearBtn(); applyAllfilter(); }); });
-document.querySelectorAll('.brandslistfilter input[type="checkbox"').forEach(chk => { chk.addEventListener('change', () => { syncBrandFilters(); toggleBrandClearBtn(); applyAllfilter(); }); });
+document.querySelectorAll('.brandslistfilter input[type="checkbox"]').forEach(chk => { chk.addEventListener('change', () => { syncBrandFilters(); toggleBrandClearBtn(); applyAllfilter(); }); });
