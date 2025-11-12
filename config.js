@@ -39,7 +39,7 @@ const smallminthumbprice = document.getElementById('smallminthumbprice');
 const smallmaxthumbprice = document.getElementById('smallmaxthumbprice');
 const smallpricemin = document.getElementById('smallpricelblmin');
 const smallpricemax = document.getElementById('smallpricelblmax');
-const smallpricelinefilter = document.getElementById('smallpricelineprice');
+const smallpricelinefilter = document.getElementById('smallpricelinefilter');
 const smallfilterpannal = document.getElementById('filtersmall');
 const minGap = 500;
 
@@ -668,33 +668,46 @@ function priceupdateSlider(e) {
 minthumbprice.addEventListener("input", priceupdateSlider);
 maxthumbprice.addEventListener("input", priceupdateSlider);
 
-function smallPriceUpdateSlider() {
-    const minVal = parseInt(smallminthumbprice.value);
-    const maxVal = parseInt(smallmaxthumbprice.value);
+function smallPriceUpdateSlider(e) {
+    let minVal = parseInt(smallminthumbprice.value);
+    let maxVal = parseInt(smallmaxthumbprice.value);
 
-    // Prevent overlap
-    if (maxVal - minVal < 1000) {
-        if (event.target.id === 'smallminthumbprice') {
-            smallminthumbprice.value = maxVal - 1000;
-        } else {
-            smallmaxthumbprice.value = minVal + 1000;
+    if (maxVal - minVal < minGap) {
+        if (e && e.target.id === "smallminthumbprice") {
+            smallminthumbprice.value = maxVal - minGap;
+            minVal = maxVal - minGap;
+        } else if (e && e.target.id === "smallmaxthumbprice") {
+            smallmaxthumbprice.value = minVal + minGap;
+            maxVal = minVal + minGap;
         }
     }
 
-    // Update displayed labels
-    smallpricemin.textContent = `₹${smallminthumbprice.value}`;
-    smallpricemax.textContent = `₹${smallmaxthumbprice.value}`;
+    // Update label text
+    smallpricemin.value = `₹${minVal}`;
+    smallpricemax.value = `₹${maxVal}`;
 
-    // Update the slider line visual
-    const percentMin = ((smallminthumbprice.value - 3500) / (13999 - 3500)) * 100;
-    const percentMax = ((smallmaxthumbprice.value - 3500) / (13999 - 3500)) * 100;
-    smallpricelinefilter.style.left = percentMin + '%';
-    smallpricelinefilter.style.right = (100 - percentMax) + '%';
+    // Update line track if you have one
+    if (smallpricelinefilter) {
+        const sliderWidth = smallpricelinefilter.offsetWidth;
+        const minPercent = ((minVal - 3500) / (13999 - 3500)) * sliderWidth;
+        const maxPercent = ((maxVal - 3500) / (13999 - 3500)) * sliderWidth;
+        smallpricelinefilter.style.left = `${minPercent}px`;
+        smallpricelinefilter.style.width = `${maxPercent - minPercent}px`;
+    }
 
-    // Apply all filters
+    // Sync with main price values (optional)
+    if (!smallPriceUpdateSlider.syncing) {
+        smallPriceUpdateSlider.syncing = true;
+        minthumbprice.value = minVal;
+        maxthumbprice.value = maxVal;
+        pricemin.value = `₹${minVal}`;
+        pricemax.value = `₹${maxVal}`;
+        priceupdateSlider();
+        smallPriceUpdateSlider.syncing = false;
+    }
+
     applyAllfilter();
 }
-
 smallminthumbprice.addEventListener("input", smallPriceUpdateSlider);
 smallmaxthumbprice.addEventListener("input", smallPriceUpdateSlider);
 
