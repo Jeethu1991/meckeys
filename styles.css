@@ -161,7 +161,6 @@ body {
     margin: 4px 0;
     justify-content: flex-start;
     padding: 3px;
-
 }
 
 .cart svg {
@@ -244,7 +243,6 @@ body {
     margin-bottom: 20px;
     display: flex;
     font-size: 14px;
-    /* justify-content: space-between; */
     flex-direction: column;
 }
 
@@ -614,7 +612,6 @@ footer {
 }
 
 .filterpannal {
-    /* margin-bottom: 66px; */
     padding-left: 10px;
     padding-right: 18px;
     position: fixed;
@@ -1235,7 +1232,6 @@ input[type="range"]::-webkit-slider-thumb {
 
 .star {
     font-size: 22px;
-    /* same visual size as your screenshot */
     line-height: 1;
     text-align: center;
 }
@@ -1297,7 +1293,6 @@ input[type="range"]::-webkit-slider-thumb {
     right: 0;
     z-index: 10;
     padding-left: 8px;
-    /* padding-inline: 18px; */
 }
 
 .btnproducts1 {
@@ -1314,7 +1309,6 @@ input[type="range"]::-webkit-slider-thumb {
 
 .btnseeproducts {
     background-color: var(--filter-buttons);
-    /* border: 1px solid transparent; */
     border-radius: 6px;
     color: var(--currentColor);
     font-size: 14px;
@@ -1547,7 +1541,6 @@ input[type="range"]::-webkit-slider-thumb {
     right: 0;
     height: 4px;
     background-color: #ccc;
-    /**/
     border-radius: 4px;
 }
 
@@ -1724,7 +1717,6 @@ input[type="range"]::-webkit-slider-thumb {
 .active-filters {
     display: flex;
     flex-wrap: wrap;
-    /* margin: 8px 0; */
 }
 
 .filter-pill {
@@ -1826,7 +1818,6 @@ input[type="range"]::-webkit-slider-thumb {
 
 #keyboardlist.loading {
     text-align: center;
-    /* padding: 60px 0; */
     color: #666;
     font-size: 14px;
     font-family: font5;
@@ -1975,8 +1966,6 @@ input[type="range"]::-webkit-slider-thumb {
 
     .filter-pannal input[type="checkbox"]{
         pointer-events: auto;
-        /* position: relative; */
-        /* z-index: 2; */
     }
 
     .filter-pannal span, .number{
@@ -2015,7 +2004,6 @@ input[type="range"]::-webkit-slider-thumb {
 
     .labelminmaxprice {
         margin-top: -38px;
-        /* padding-top: 1px; */
         margin-left: -15px;
     }
 
@@ -2131,7 +2119,6 @@ input[type="range"]::-webkit-slider-thumb {
         width: 21px;
         object-fit: fill;
         height: 22px;
-        /* max-width: auto; */
     }
 
     .price {
@@ -2255,9 +2242,7 @@ input[type="range"]::-webkit-slider-thumb {
     .filter .labelminmax {
         width: 100%;
         max-width: 240px;
-        /* ✅ adjust this to fit inside your filter column */
         margin: 0 auto;
-        /* ✅ center it inside filter column */
     }
 
     .filter .pricebars {
@@ -2278,7 +2263,6 @@ input[type="range"]::-webkit-slider-thumb {
 
     .filter .pricebar {
         max-width: 220px !important;
-        /* ✅ adjust this number */
         width: 100% !important;
         overflow: hidden !important;
         position: relative;
@@ -2299,18 +2283,15 @@ input[type="range"]::-webkit-slider-thumb {
         padding-top: 17px;
     }
 
-    /* LIMIT internal line width even if JS sets inline width */
     .filter .pricebar .priceline {
         max-width: 220px !important;
     }
 
-    /* Range inputs must respect container width */
     .filter .pricebar input[type=range] {
         max-width: 220px !important;
         width: 100% !important;
     }
 
-    /* Histogram bars */
     .filter .pricebars {
         max-width: 220px !important;
         overflow: hidden;
@@ -2448,10 +2429,9 @@ input[type="range"]::-webkit-slider-thumb {
         margin: 3px;
     }
 }
-
+    
 @media screen and (min-width: 1024px) {
 
-    
     .txtfootarion{
         transform: translateY(3px);
     }
@@ -2464,20 +2444,16 @@ input[type="range"]::-webkit-slider-thumb {
         transform: translateX(10px);
     }
 
+     #num1{
+        left: 0;
+    }
+
     .footer_links{
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 90px;
         white-space: nowrap;
     }
-
-    /* .termsconditions{
-        margin-left: -1px;
-    } */
-
-    /* .contactus{
-        transform: translateX(1px);
-    } */
 
     .footerdisplay{
         display: flex;
@@ -2532,23 +2508,106 @@ input[type="range"]::-webkit-slider-thumb {
     
 }
 
-@media screen and (min-width: 1047px){
-    .linksbottom{
-        display: flex;
-        flex-direction: row;
+@media screen and (min-width: 1026px) {
+
+    .product-image-wrapper{
+        width: fit-content;
     }
-}
+
+    .rating{
+        right: 12px;
+    }
+
+    .nav_hm_shop_keybrd a{
+        margin-left: 7.2px;
+    }
+
+    .slash1{
+        margin-right: -8px;
+        padding-left: 3.7px;
+    }
+
+    .slash2{
+        padding-left: 3px;
+        padding-right: 8px;
+    }
+
+    .product img{
+        width: 209.4px;
+        height: 139.59px;
+    }
+    
+    .brandslist ul{
+        padding-right: 22px;
+    }
+
+    .size ul{
+        padding-right: 22px;
+    }
+
+    .connectivity ul{
+        padding-right: 22px;
+    }
+
+    .keyswitches ul{
+        padding-right: 22px;
+    }
+
+    .footer{
+        padding-top: 20px;
+    }
+
+    .footer_links{
+        gap: 91px;
+    }
+
+    .termsconditions{
+        transform:translateX(9px);
+    }
+
+    .footer_links span{
+    line-height: 17px;
+    }
+
+    .txtfooter p{
+        padding-top: 0px;
+        padding-bottom: 1px;
+    }
+
+    .footerimage{
+    padding-top: 24px;
+    }
+
+    .contactus{
+        gap: 7.9px;
+        padding-top: 11.5px;
+        margin-left: -0.5px;
+    }
+} 
 
 @media screen and (min-width: 1440px) {
 
     .wrapper{
         max-width: 1170;
     }
+
+    .contact_icons img{
+        width: 23px;
+        height: 23px;
+    }
+
+    .cantactus {
+        transform:translateX(4px);
+    }
     
     .footerimage{
         padding-bottom: 4px;
         padding-top: 28px;
         max-width: 1170px;
+    }
+
+    footer{
+        padding-top: 21px;
     }
 
     .linksbottom div:nth-child(5){
@@ -2566,8 +2625,11 @@ input[type="range"]::-webkit-slider-thumb {
     .footer_links{
         gap: 127px;
     }
+}
 
-
-
-
+@media screen and (min-width: 1047px){
+    .linksbottom{
+        display: flex;
+        flex-direction: row;
+    }
 }

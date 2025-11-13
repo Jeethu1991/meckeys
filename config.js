@@ -50,16 +50,19 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => response.json())
         .then(data => {
             allProducts = data;
+
             // Ensure elements exist before calling these
             if (typeof updateSlider === 'function') updateSlider();
             if (typeof renderProducts === 'function') renderProducts(allProducts);
             applyAllfilter();
+            
             //Remove Loading the price,brand and allFilters filter
             filterSlide.classList.remove('active');
             backicon.classList.remove('active');
             brandpannal.classList.remove('active');
             pricepannal.classList.remove('active');
             closeicon.classList.remove('active');
+            
             //Display Allfilter
             if (sortSelect && filterSlide) {
                 sortSelect.addEventListener('click', () => {
@@ -74,6 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     closeicon.classList.add('active');
                 });
             }
+            
             // Display brand Filter
             if (brandsfilter && brandpannal) {
                 brandsfilter.addEventListener('click', () => {
@@ -81,6 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     filterSlide.classList.remove('active');
                 });
             }
+            
             // Display price filter
             if (priceFilter && pricepannal) {
                 priceFilter.addEventListener('click', () => {
@@ -88,6 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     filterSlide.classList.remove('active');
                 });
             }
+            
             //close Allfilters 
             if (selectclose && filterSlide) {
                 selectclose.addEventListener('click', () => {
@@ -102,6 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     closeicon.classList.remove('active');
                 })
             }
+            
             //close brand filter
             if (brandback && brandpannal) {
                 brandback.addEventListener('click', () => {
@@ -109,6 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     filterSlide.classList.remove('active');
                 });
             }
+            
             //close price filter
             if (priceback && pricepannal) {
                 priceback.addEventListener('click', () => {
@@ -127,6 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     scrollBtn.classList.remove('show');
                 }
             });
+            
             scrollBtn.addEventListener('click', () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
@@ -134,9 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // ------------------------------------------------
             const allFilterBtn = document.getElementById("btnfilter");     // desktop
             const mAllFilterBtn = document.getElementById("m_btnfilter");  // mobile
-
             const mainFilterPanel = document.querySelector(".filterpannal");
-
             const brandPanel = document.querySelector(".filterbrands");
             const pricePanel = document.querySelector(".filterprice");
             const sizePanel = document.querySelector(".filter-pannal#size-filter");
@@ -144,7 +151,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const keySwitchPanel = document.querySelector(".filter-pannal#keyswitches-filter");
 
             function openMainFilterPanel() {
-
                 // hide all sub-panels
                 if (brandPanel) brandPanel.classList.remove("active");
                 if (pricePanel) pricePanel.classList.remove("active");
@@ -245,7 +251,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     applyAllfilter();
                     renderActiveFilters();
                     toggleClearButton();
-                    // toggleBrandClearBtn();
                     syncBrandFilters();
                 });
             });
@@ -256,6 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => {
             console.error('Error in fetch products:', error);
         });
+
     loadpage.classList.remove('loading');
     hookActiveFilterRenderers();
     bindFilterEvents();
@@ -276,7 +282,9 @@ function bindFilterEvents() {
         });
     });
 }
+
 // ------------------------------------------ Small DropDown Click Close  ---------------------------------------------------------
+
 document.querySelectorAll('.dropdown-arrow').forEach(arrow => {
     arrow.addEventListener('click', function (e) {
         const panel = this.closest('.filter-pannal');
@@ -293,6 +301,7 @@ function renderProducts(products) {
     products.forEach(product => {
         const div = document.createElement('div');
         div.className = 'keyproduct product'; //product is used for getting the filtered value
+
         //Generate stars        
         const maxStars = 5;
         const fullstars = Math.floor(product.rating);
@@ -308,6 +317,7 @@ function renderProducts(products) {
         for (let i = 0; i < emptyStars; i++) {
             starsHTML += '<span class = "star empty">☆</span>';
         }
+
         //For Product Price Details
         let priceHTML;
         if (product.price.discounted && product.price.actual) {
@@ -327,6 +337,7 @@ function renderProducts(products) {
         else {
             priceHTML = `<strong><span> </span></strong>`;
         }
+
         // out of stock strip
         const isOutOfStock = (product.stock || '').toLowerCase() === 'outofstock';
         const outOfStockHTML = isOutOfStock ? `<div class="outofstockstrip">Out of Stock</div>` : '';
@@ -349,7 +360,9 @@ function renderProducts(products) {
         container.appendChild(div);
     });
 }
+
 // ------------------------------------------ buttons for checkboxes, price, etc ---------------------------------------------------------
+
 const activeFiltersContainer = document.getElementById('activeFiltersContainer');
 const clearAllBtn = document.getElementById('btnclearallfilter');
 const DEFAULT_MIN = 3500;
@@ -382,6 +395,7 @@ function getActivefilters() {
             active.push({ type: 'radio', key: (r.name + ':' + r.value), label });
         }
     });
+
     const currentMin = parseInt(minRange.value);
     const currentMax = parseInt(maxRange.value);
 
@@ -392,6 +406,7 @@ function getActivefilters() {
             label: `Price from: ₹${currentMin}`
         });
     }
+
     if (currentMax !== DEFAULT_MAX) {
         active.push({
             type: 'price',
@@ -418,7 +433,6 @@ function renderActiveFilters() {
     activeFiltersContainer.innerHTML = '';
 
     const active = getActivefilters();
-
     const uniquefilters = [];
     const seenKeys = new Set();
 
@@ -446,6 +460,7 @@ function renderActiveFilters() {
     if (clearAllBtn) {
         clearAllBtn.style.display = active.length > 1 ? 'inline-block' : 'none';
     }
+    
     updateClearAllButtonVisibility();
 }
 
@@ -463,6 +478,7 @@ function updateClearAllButtonVisibility() {
         clearAllBtn.style.display = 'none';
     }
 }
+
 function removefilter(filter) {
     if (!filter) return;
 
@@ -519,6 +535,7 @@ function removefilter(filter) {
     renderActiveFilters();
     updateClearAllButtonVisibility();
 }
+
 function cssEscape(s) {
     if (!s) return '';
     return String(s).replace(/([ #;&,.+*~':"!^$[\]()=>|\/@])/g, '\\$1');
@@ -570,9 +587,12 @@ function hookActiveFilterRenderers() {
         });
     }
 }
+
 hookActiveFilterRenderers();
 renderActiveFilters();
+
 // ------------------------------------------ All slider working---------------------------------------------------------
+
 function updateSlider(e) {
     let minVal = parseInt(minRange.value);
     let maxVal = parseInt(maxRange.value);
@@ -587,6 +607,7 @@ function updateSlider(e) {
             maxVal = minVal + minGap;
         }
     }
+
     const sliderWidth = slider.offsetWidth;
     const minPercent = ((minVal - 3500) / (13999 - 3500)) * sliderWidth;
     const maxPercent = ((maxVal - 3500) / (13999 - 3500)) * sliderWidth;
@@ -616,6 +637,7 @@ function updateSlider(e) {
     toggleClearButton();
     applyAllfilter();
 }
+
 minRange.addEventListener("input", updateSlider);
 maxRange.addEventListener("input", updateSlider);
 
@@ -665,6 +687,7 @@ function priceupdateSlider(e) {
     toggleClearButton();
     applyAllfilter();
 }
+
 minthumbprice.addEventListener("input", priceupdateSlider);
 maxthumbprice.addEventListener("input", priceupdateSlider);
 
@@ -708,6 +731,7 @@ function smallPriceUpdateSlider(e) {
 
     applyAllfilter();
 }
+
 smallminthumbprice.addEventListener("input", smallPriceUpdateSlider);
 smallmaxthumbprice.addEventListener("input", smallPriceUpdateSlider);
 
@@ -748,16 +772,15 @@ document.getElementById('btnpricefilter').addEventListener('click', () => {
     if (minthumbprice) pricemin.value = "min.";
     if (maxthumbprice) pricemax.value = "max.";
 
-    // if (smallminthumbprice) smallpricemin.value = "min.";
-    // if (smallmaxthumbprice) smallpricemax.value = "max.";
-
     document.getElementById('btnpricefilter').style.display = 'none';
     updateSlider();
     applyAllfilter();
     renderActiveFilters();
     updateClearAllButtonVisibility();
 });
+
 const brandClearBtn = document.getElementById('btnbrandfilter');
+
 if (brandClearBtn) {
     brandClearBtn.addEventListener('click', () => {
         document.querySelectorAll('.brandslist input[type="checkbox"], .brandslistfilter input[type="checkbox"]').forEach(cb => {
@@ -774,7 +797,9 @@ if (brandClearBtn) {
         applyAllfilter();
     });
 }
+
 const priceClearBtn = document.getElementById('btnpricefilter');
+
 if (priceClearBtn) {
     priceClearBtn.addEventListener('click', () => {
         const defaultMin = 3500;
@@ -790,18 +815,10 @@ if (priceClearBtn) {
             maxthumbprice.value = defaultmax;
         }
 
-        // if (smallminthumbprice && smallmaxthumbprice) {
-        //     smallminthumbprice.value = DEFAULT_MIN;
-        //     smallmaxthumbprice.value = DEFAULT_MAX;
-        // }
-
-
         if (minPrice) minPrice.textContent = `₹${defaultMin}`;
         if (maxPrice) maxPrice.textContent = `₹${defaultmax}`;
         if (pricemin) pricemin.textContent = `₹${defaultMin}`;
         if (pricemax) pricemax.textContent = `₹${defaultmax}`;
-        // if (smallpricemin) smallpricemin.textContent = `₹${defaultMin}`;
-        // if (smallpricemax) smallpricemax.textContent = `₹${defaultmax}`;
 
         priceClearBtn.style.display = 'none';
 
@@ -816,6 +833,7 @@ if (priceClearBtn) {
 }
 // ------------------------------------------ to clear all checkboxes and radiobuttons---------------------------------------------------------
 //clear the checkbox when the clear button is clicked in brand
+
 function toggleBrandClearBtn() {
     const anyChecked = document.querySelectorAll('input[type="checkbox"]:checked').length > 0;
     const brandclear = document.getElementById('btnbrandfilter');
@@ -827,7 +845,9 @@ function toggleBrandClearBtn() {
         brandclear.style.display = 'none';
     }
 }
+
 // ------------------------------------------ brand reflects in bothe Allfunctions as well as brandfilter ---------------------------------------------------------
+
 function syncBrandFilters() {
     if (syncBrandFilters.syncing) return;
     syncBrandFilters.syncing = true;
@@ -848,6 +868,7 @@ function syncBrandFilters() {
     });
     syncBrandFilters.syncing = false;
 }
+
 //clear the checkbox when the clear button is clicked
 function toggleClearButton() {
     const minVal = parseInt(minRange.value);
@@ -862,11 +883,12 @@ function toggleClearButton() {
         clearButton.style.display = 'none';
     }
 }
+
 // ------------------------------------------ Apply all changes happening in all the filters ---------------------------------------------------------
+
 function applyAllfilter() {
     let min, max;
 
-    // if ((pricepannal.classList.contains('active')) || (smallfilterpannal.classList.contains('active'))) {
     if (pricepannal && pricepannal.classList.contains('active')) {
         min = parseInt(pricemin.value.replace(/[₹,]/g, '')) || 0;
         max = parseInt(pricemax.value.replace(/[₹,]/g, '')) || Infinity;
@@ -882,9 +904,12 @@ function applyAllfilter() {
 
     const showInStock = inStockCheckbox.checked;
     const showOutofstock = outOfStockCheckbox.checked;
+
     let selectedstock = 'any';
+
     if (showInStock) selectedstock = 'instock';
     else if (showOutofstock) selectedstock = 'outofstock';
+
     //Brand
     const selectedBrands = [
         ...Array.from(brandCheckboxes),
@@ -892,22 +917,27 @@ function applyAllfilter() {
     ]
         .filter(chk => chk.checked)
         .map(chk => chk.value.toLowerCase());
+
     //Size
     const selectedsize = Array.from(sizeCheckboxes)
         .filter(chk => chk.checked)
         .map(chk => chk.value.toLowerCase());
+
     //connectivity
     const selectedconnect = Array.from(connectivity)
         .filter(chk => chk.checked)
         .map(chk => chk.value.toLowerCase());
+
     //keyswitches
     const selectkeyswitch = Array.from(keyswitches)
         .filter(chk => chk.checked)
         .map(chk => chk.value.toLowerCase());
+
     //keycaps
     const selectkeycaps = Array.from(keycapCheckbox)
         .filter(chk => chk.checked)
         .map(chk => chk.value.toLowerCase());
+
     //price
     const filtered = allProducts.filter(p => {
         let priceValue = 0;
@@ -926,9 +956,11 @@ function applyAllfilter() {
                 priceValue = parseInt(p.price.max.replace(/[₹,]/g, '')) || 0;
             }
         }
+
         else {
             priceValue = parseInt(p.price.replace(/[₹,]/g, '')) || 0;
         }
+
         const stockStatus = (p.stock || '').toLowerCase();
         const brandName = (p.brand || '').toLowerCase();
         const sizevalue = (p.size || '').toLowerCase();
@@ -947,11 +979,11 @@ function applyAllfilter() {
         return inPriceRange && inStockFilter && inBrandFilter && sizesfrom && connection && inswitches && keycapslist;
     });
 
-    // bindFilterEvents();
     renderProducts(filtered);
 }
 
 // ------------------------------------------ Event listeners for all the buttons, checkboxes, radiobuttons, and sliders ---------------------------------------------------------
+
 minRange.addEventListener('input', applyAllfilter);
 maxRange.addEventListener('input', applyAllfilter);
 inStockCheckbox.addEventListener('change', () => { applyAllfilter(); toggleClearButton(); });
