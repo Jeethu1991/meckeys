@@ -1968,6 +1968,11 @@ input[type="range"]::-webkit-slider-thumb {
         pointer-events: auto;
     }
 
+    input[type="checkbox"].active + label{
+        background-color: #f0f0f0;
+        border-color: #111;
+    }
+
     .filter-pannal span, .number{
         pointer-events: none;
     }

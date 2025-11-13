@@ -55,14 +55,14 @@ document.addEventListener('DOMContentLoaded', () => {
             if (typeof updateSlider === 'function') updateSlider();
             if (typeof renderProducts === 'function') renderProducts(allProducts);
             applyAllfilter();
-            
+
             //Remove Loading the price,brand and allFilters filter
             filterSlide.classList.remove('active');
             backicon.classList.remove('active');
             brandpannal.classList.remove('active');
             pricepannal.classList.remove('active');
             closeicon.classList.remove('active');
-            
+
             //Display Allfilter
             if (sortSelect && filterSlide) {
                 sortSelect.addEventListener('click', () => {
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     closeicon.classList.add('active');
                 });
             }
-            
+
             // Display brand Filter
             if (brandsfilter && brandpannal) {
                 brandsfilter.addEventListener('click', () => {
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     filterSlide.classList.remove('active');
                 });
             }
-            
+
             // Display price filter
             if (priceFilter && pricepannal) {
                 priceFilter.addEventListener('click', () => {
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     filterSlide.classList.remove('active');
                 });
             }
-            
+
             //close Allfilters 
             if (selectclose && filterSlide) {
                 selectclose.addEventListener('click', () => {
@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     closeicon.classList.remove('active');
                 })
             }
-            
+
             //close brand filter
             if (brandback && brandpannal) {
                 brandback.addEventListener('click', () => {
@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     filterSlide.classList.remove('active');
                 });
             }
-            
+
             //close price filter
             if (priceback && pricepannal) {
                 priceback.addEventListener('click', () => {
@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     scrollBtn.classList.remove('show');
                 }
             });
-            
+
             scrollBtn.addEventListener('click', () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
@@ -453,6 +453,8 @@ function renderActiveFilters() {
         btn.innerHTML = `<span class="filter-pill-label">${filter.label}</span>${pillSvg}`;
         btn.addEventListener('click', () => {
             removefilter(filter);
+            applyAllfilter();
+
         });
         activeFiltersContainer.appendChild(btn);
     });
@@ -460,7 +462,7 @@ function renderActiveFilters() {
     if (clearAllBtn) {
         clearAllBtn.style.display = active.length > 1 ? 'inline-block' : 'none';
     }
-    
+
     updateClearAllButtonVisibility();
 }
 
@@ -645,15 +647,15 @@ function priceupdateSlider(e) {
     let minVal = parseInt(minthumbprice.value);
     let maxVal = parseInt(maxthumbprice.value);
 
-    if (maxVal - minVal < minGap){
-        if (e && e.target.id === "minthumbprice"){
+    if (maxVal - minVal < minGap) {
+        if (e && e.target.id === "minthumbprice") {
             minthumbprice.value = maxVal - minGap;
             minVal = maxVal - minGap;
         }
-        else if (e && e.target.id === "maxthumbprice"){
+        else if (e && e.target.id === "maxthumbprice") {
             maxthumbprice.value = minVal + minGap;
             maxVal = minVal + minGap;
-            
+
         }
     }
     const sliderWidth = priceslider.offsetWidth;
@@ -690,6 +692,20 @@ function priceupdateSlider(e) {
 
 minthumbprice.addEventListener("input", priceupdateSlider);
 maxthumbprice.addEventListener("input", priceupdateSlider);
+
+document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+    cb.addEventListener('click', (e) => {
+
+        setTimeout(() => {
+            if(cb.closest('brandslist') || cb.closest('.brandslistfilter')){
+                syncBrandFilters();
+            }
+            applyAllfilter();
+            renderActiveFilters();
+            updateClearAllButtonVisibility();
+        },0);
+    });
+});
 
 function smallPriceUpdateSlider(e) {
     let minVal = parseInt(smallminthumbprice.value);
@@ -848,26 +864,61 @@ function toggleBrandClearBtn() {
 
 // ------------------------------------------ brand reflects in bothe Allfunctions as well as brandfilter ---------------------------------------------------------
 
-function syncBrandFilters() {
-    if (syncBrandFilters.syncing) return;
-    syncBrandFilters.syncing = true;
+// function syncBrandFilters() {
+//     if (syncBrandFilters.syncing) return;
+//     syncBrandFilters.syncing = true;
 
-    const allfilterbrands = document.querySelectorAll('.brandslist input[type="checkbox"]');
-    const brandFilterBrands = document.querySelectorAll('.brandslistfilter input[type="checkbox"]');
-    const selectedValues = [
-        ...Array.from(allfilterbrands),
-        ...Array.from(brandFilterBrands)
-    ]
-        .filter(cb => cb.checked)
-        .map(cb => cb.value.toLowerCase());
-    allfilterbrands.forEach(cb => {
-        cb.checked = selectedValues.includes(cb.value.toLowerCase());
+//     const allfilterbrands = document.querySelectorAll('.brandslist input[type="checkbox"]');
+//     const brandFilterBrands = document.querySelectorAll('.brandslistfilter input[type="checkbox"]');
+//     const selectedValues = [
+//         ...Array.from(allfilterbrands),
+//         ...Array.from(brandFilterBrands)
+//     ]
+//         .filter(cb => cb.checked)
+//         .map(cb => cb.value.toLowerCase());
+//     allfilterbrands.forEach(cb => {
+//         cb.checked = selectedValues.includes(cb.value.toLowerCase());
+//     });
+//     brandFilterBrands.forEach(cb => {
+//         cb.checked = selectedValues.includes(cb.value.toLowerCase());
+//     });
+//     syncBrandFilters.syncing = false;
+// }
+
+function syncBrandFilters() {
+    const brandsMain = document.querySelectorAll('.brandslist input[type="checkbox"]');
+    const brandsSmall = document.querySelectorAll('.brandslistfilter input[type="checkbox"]');
+
+    // Create a quick lookup by value or id
+    const mapSmall = new Map();
+    brandsSmall.forEach(cb => {
+        mapSmall.set(cb.value || cb.id, cb);
     });
-    brandFilterBrands.forEach(cb => {
-        cb.checked = selectedValues.includes(cb.value.toLowerCase());
+
+    const mapMain = new Map();
+    brandsMain.forEach(cb => {
+        mapMain.set(cb.value || cb.id, cb);
     });
-    syncBrandFilters.syncing = false;
+
+    // Sync from main → small
+    brandsMain.forEach(cb => {
+        const key = cb.value || cb.id;
+        const twin = mapSmall.get(key);
+        if (twin && twin.checked !== cb.checked) {
+            twin.checked = cb.checked;
+        }
+    });
+
+    // Sync from small → main
+    brandsSmall.forEach(cb => {
+        const key = cb.value || cb.id;
+        const twin = mapMain.get(key);
+        if (twin && twin.checked !== cb.checked) {
+            twin.checked = cb.checked;
+        }
+    });
 }
+
 
 //clear the checkbox when the clear button is clicked
 function toggleClearButton() {
