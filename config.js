@@ -818,7 +818,7 @@ function toggleBrandClearBtn() {
 function syncBrandFilters() {
     const brandsMain = document.querySelectorAll('.brandslist input[type="checkbox"]');
     const brandsSmall = document.querySelectorAll('.brandslistfilter input[type="checkbox"]');
-
+    
     // Create a quick lookup by value or id
     const mapSmall = new Map();
     brandsSmall.forEach(cb => {
