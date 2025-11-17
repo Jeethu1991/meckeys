@@ -2784,6 +2784,21 @@ input[type="range"]::-webkit-slider-thumb {
 
 @media screen and (min-width: 1440px) {
 
+    .list1, 
+    .list2,
+    .list3,
+    .list4,
+    .list5,
+    .list6,
+    .list7,
+    .list8 {
+        padding-bottom: 7px;   
+    }
+
+    .size{
+        padding-top: 12px;
+    }
+
     .wrapper{
         max-width: 1170;
     }
@@ -2812,6 +2827,7 @@ input[type="range"]::-webkit-slider-thumb {
 
     .numbr{
         margin-right: 8px;
+        transform: translateY(-1px);
     }
     
     .footerimage{

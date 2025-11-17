@@ -536,6 +536,10 @@ function hookActiveFilterRenderers() {
 
     if (clearAllBtn) {
         clearAllBtn.addEventListener('click', () => {
+            const filtersbtn = document.getElementById('activeFiltersContainer');
+            filtersbtn.style.display = 'none';
+            clearAllBtn.style.display = 'none';
+                        
             document.querySelectorAll('input[type="checkbox"],input[type="radio"]').forEach(i => i.checked = false);
 
             if (minRange && maxRange) { minRange.value = DEFAULT_MIN; maxRange.value = DEFAULT_MAX; }
@@ -550,8 +554,11 @@ function hookActiveFilterRenderers() {
             renderActiveFilters();
             if (typeof applyAllfilter === 'function') applyAllfilter();
         });
+        
     }
 }
+
+
 // ------------------------------------------ All slider working---------------------------------------------------------
 function updateSlider(e) {
     let minVal = parseInt(minRange.value);
