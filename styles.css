@@ -66,6 +66,12 @@ body {
 
 /* ---------------------------------------------- Wrapper --------------------------------------------- */
 
+.outerwrapper{
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+}
+
 .wrapper {
     display: grid;
     grid-template-columns: auto auto;
@@ -248,7 +254,7 @@ body {
 
 .main_content {
     margin-bottom: 140px;
-    margin-top: 29px;
+    margin-top: 27.1px;
     padding: 0 15px;
 }
 
@@ -261,7 +267,7 @@ body {
     letter-spacing: 0px;
     font-family: font5;
     font-weight: 400;
-    margin: 0 0 12px;
+    margin: 0 0 11.4px;
     scrollbar-width: none;
     overflow-x: scroll;
 }
@@ -291,8 +297,8 @@ body {
     letter-spacing: 0px;
     font-family: font5;
     font-weight: 400;
-    padding-left: 6px;
-    padding-right: 5px;
+    padding-left: 3.5px;
+    padding-right: 3.8px;
 }
 
 .slash2 {
@@ -305,8 +311,8 @@ body {
     letter-spacing: 0px;
     font-family: font5;
     font-weight: 400;
-    padding-left: 6px;
-    padding-right: 9px;
+    padding-left: 3.5px;
+    padding-right: 7.5px;
 }
 
 .bodytext p {
@@ -384,6 +390,7 @@ body {
     width: 99.5312px;
     white-space: nowrap;
     padding-bottom: 7.2px;
+    height: 32.5px;
 }
 
 .btnfilter svg {
@@ -455,7 +462,11 @@ footer {
     margin: 0;
     text-align: left;
     line-height: 10px;
-    padding-top: 3px;
+    padding-top: 3.6px;
+}
+
+.txtfootarion{
+    transform: translateY(-1.2px);
 }
 
 .contact_icons {
@@ -472,7 +483,7 @@ footer {
     cursor: pointer;
     object-fit: unset;
     width: 23px;
-    height: 25px;
+    height: 23px;
 }
 
 .links {
@@ -494,7 +505,11 @@ footer {
     background: var(--link-background);
     padding: 3px 5px 5px;
     margin: 1px;
-    height: 25px;
+    height: 23px;
+/*  height:25px;
+    padding: 0.6px 4.99px 0px;
+    margin: 1px;
+    height: 23px; */
 }
 
 .visa svg,
@@ -1877,6 +1892,10 @@ input[type="range"]::-webkit-slider-thumb {
 
 @media screen and (min-width: 768px) {
 
+    .main_content{
+        margin-top: 29px;
+    }
+
     .filterbuttons {
         display: none !important;
     }
@@ -1898,6 +1917,28 @@ input[type="range"]::-webkit-slider-thumb {
 
     .search {
         padding-right: 3px;
+    }
+
+    .nav_hm_shop_keybrd a{
+        padding-top: 1px;
+    }
+
+    .slash1{
+        padding-left: 3.3px;
+        padding-right: 3.8px;
+    }
+
+    .slash2{
+        padding-left: 3.7px;
+        padding-right: 7.4px;
+    }
+
+    .nav_hm_shop_keybrd{
+        margin: 0 0 15px;
+    }
+
+    .bodytext{
+        margin-bottom: 22px;
     }
 
     .arrowicon {
@@ -1923,14 +1964,13 @@ input[type="range"]::-webkit-slider-thumb {
         gap: 8px;
         position: relative;
         padding-bottom: 20px;
-        padding-top: 10px;
+        padding-top: 9.2px;
     }
 
     .filterbtn {
         background: var(--currentColor);
-        border: 1px solid var(--cartCounttext);
+        box-shadow: inset 0 0 0 1px #363636;
         border-radius: 6px;
-        padding: 6px 12px;
         font-size: 14.3px;
         font-weight: 400;
         line-height: 17.875px;
@@ -1938,6 +1978,20 @@ input[type="range"]::-webkit-slider-thumb {
         cursor: pointer;
         transition: all 0.2s ease;
         margin-bottom: 8px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        padding-right: 12.2px;
+        padding-left: 11.91px;
+    }
+
+    .filterbtn div:nth-child(4){
+        padding-left: 12px;
+    }
+
+    .filterbtn svg{
+        margin-bottom: -2px;
+        margin-left: 2px;
+        transform: scale(1.2);
     }
 
     .filterbtn.active {
@@ -2045,6 +2099,47 @@ input[type="range"]::-webkit-slider-thumb {
         font-size: 15px;
     }
 
+    .footer_links span {
+        font-size: 13px;
+        line-height: 1.2em;
+    }
+
+    .contactus h3{
+        font-size: 13px;
+        line-height: 1.2em;
+        margin-top: -6.8px;
+    }
+
+    .contact_icons{
+        padding-top: 7.9px;
+    }
+
+    .txtfootarion{
+        transform: translateY(7px);
+    }
+
+    .txtfooter p{
+        font-size: 13px;
+        line-height: 1.6em;
+    }
+    
+    .termsconditions span:nth-child(1){
+        transform: translateY(-1px);
+    }
+
+    .links{
+        margin-bottom: 5.7px;
+    }
+
+}
+
+@media screen and (min-width: 769px) {
+    
+    .bodytext{
+        display: flex;
+        flex-direction: row;
+        justify-content:space-between;
+    }
 }
 
 @media screen and (min-width: 959px) {
@@ -2080,6 +2175,10 @@ input[type="range"]::-webkit-slider-thumb {
         grid-template-columns: repeat(3, 1fr);
         grid-gap: 40px 30px;
         margin-bottom: 60px;
+    }
+
+    .txtshow{
+        margin-top: 1px;
     }
 
     .newaccount{
@@ -2437,8 +2536,12 @@ input[type="range"]::-webkit-slider-thumb {
     
 @media screen and (min-width: 1024px) {
 
+    .my-account-wrapper{
+        margin-top: 8px;
+    }
+
     .txtfootarion{
-        transform: translateY(3px);
+        transform: translateY(8px);
     }
 
     .enquiry{
@@ -2449,7 +2552,28 @@ input[type="range"]::-webkit-slider-thumb {
         transform: translateX(10px);
     }
 
-     #num1{
+    .numbr{
+        margin-right: -7px;
+    }
+
+    .product img{
+        width: 208.93px;
+        height: 139.28px;
+    }
+
+    .rating{
+        right: 11px;
+    }
+
+    .nav_hm_shop_keybrd{
+        margin-left: 7px;
+    }
+
+    .txtshow{
+        transform: translateY(1px);
+    }
+
+    #num1{
         left: 0;
     }
 
@@ -2466,6 +2590,39 @@ input[type="range"]::-webkit-slider-thumb {
         gap: 78px;
         max-width: 1140px;
         margin-inline: auto;
+        transform: translateY(1px);
+    }
+
+    .termsconditions span:nth-child(1){
+        transform: none;
+    }
+
+    .txtfooter p{
+        margin-top: 2px;
+    }
+
+    .menu1{
+        margin-top: 1px;
+    }
+
+    .menu2{
+        margin-top: 2px;
+    }
+
+    .menu3{
+        margin-top: 2px;
+    }
+
+    .menuearrow{
+        transform: translate(0.5px, 3px);
+    }
+
+    .menu4{
+        margin-top: 1px;
+    }
+
+    .menu5{
+        transform: translateY(-0.1px);
     }
 
     .links{
@@ -2473,7 +2630,7 @@ input[type="range"]::-webkit-slider-thumb {
     }
 
     .contact_icons img{
-        width: 21px;
+        width: 20.4px;
         height: 22px;
     }
 
@@ -2487,9 +2644,43 @@ input[type="range"]::-webkit-slider-thumb {
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        padding-top: 23px;
+        padding-top: 24px;
         max-width: 1140px;
         margin-inline: auto;
+    }
+
+    .contactus h3{
+        padding-top: 2px;
+    }
+
+    .lblcontact{
+        transform: translateY(3px);
+    }
+
+    .contact_icons{
+        padding-top: 10px;
+    }
+
+    .contact_icons a:nth-child(2){
+        transform: translateX(1px);
+    }
+
+    .contact_icons a:nth-child(3){
+        transform: translateX(1.3px);
+    }
+
+    .contact_icons a:nth-child(4){
+        transform: translate(2px, -3px);
+        height: 21px;
+        width: 21px;
+    }
+
+    .contact_icons a:nth-child(5){
+        transform: translateX(2px);
+    }
+
+    .contact_icons a:nth-child(6){
+        transform: translateX(2px);
     }
 
     .linksbottom{
@@ -2500,6 +2691,7 @@ input[type="range"]::-webkit-slider-thumb {
 
     .linksbottom div{
         width: 40px;
+        height: 25px;
     }
 
     .linksbottom div:nth-child(4){
@@ -2604,6 +2796,23 @@ input[type="range"]::-webkit-slider-thumb {
     .cantactus {
         transform:translateX(4px);
     }
+
+    .filter{
+        width: 351px;
+    }
+
+    .nav_hm_shop_keybrd{
+        margin-left: -7.4px;
+    }
+
+    .slash1{
+        margin-right: -7px;
+        padding-left: 3.3px;
+    }
+
+    .numbr{
+        margin-right: 8px;
+    }
     
     .footerimage{
         padding-bottom: 4px;
@@ -2615,8 +2824,15 @@ input[type="range"]::-webkit-slider-thumb {
         padding-top: 21px;
     }
 
-    .linksbottom div:nth-child(5){
-        
+    .txtfooter p{
+        padding-top: 3px;
+    }
+
+    .linksbottom{
+        padding-bottom: 4px;
+    }
+
+    .linksbottom div:nth-child(5){        
         transform: translateX(0px);
     }
 
@@ -2630,6 +2846,10 @@ input[type="range"]::-webkit-slider-thumb {
     .footer_links{
         gap: 127px;
     }
+
+    .contactus{
+        padding-left: 19px;
+    }
 }
 
 @media screen and (min-width: 1047px){
@@ -2637,4 +2857,15 @@ input[type="range"]::-webkit-slider-thumb {
         display: flex;
         flex-direction: row;
     }
+}
+
+@media screen and (min-width: 2560px) {
+    .footer_links span:nth-child(1){
+        transform: translateY(-1px);
+    }
+
+    .txtfooter p{
+        padding-top: 2px;
+    }
+    
 }
