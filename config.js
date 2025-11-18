@@ -545,7 +545,7 @@ function hookActiveFilterRenderers() {
             if (minRange && maxRange) { minRange.value = DEFAULT_MIN; maxRange.value = DEFAULT_MAX; }
             if (minthumbprice && maxthumbprice) { minthumbprice.value = DEFAULT_MIN; maxthumbprice.value = DEFAULT_MAX; }
 
-            if (smallminthumbprice && smallmaxthumbprice) { smallminthumbprice.value = DEFAULT_MIN; smallminthumbprice = DEFAULT_MAX; }
+            if (smallminthumbprice && smallmaxthumbprice) { smallminthumbprice.value = DEFAULT_MIN; smallminthumbprice.value = DEFAULT_MAX; }
 
             if (typeof syncBrandFilters === 'function') syncBrandFilters();
             if (typeof updateSlider === 'function') updateSlider();
@@ -661,7 +661,7 @@ document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
     cb.addEventListener('click', (e) => {
 
         setTimeout(() => {
-            if(cb.closest('brandslist') || cb.closest('.brandslistfilter')){
+            if(cb.closest('.brandslist') || cb.closest('.brandslistfilter')){
                 syncBrandFilters();
             }
             applyAllfilter();
