@@ -2556,9 +2556,17 @@ input[type="range"]::-webkit-slider-thumb {
         margin-right: -7px;
     }
 
+    .bodytext{
+        margin-bottom: 30px;
+    }
+
+    .discription h3{
+        font-size: 17.5px;
+    }
+
     .product img{
-        width: 208.93px;
-        height: 139.28px;
+        width: 208.927px;
+        height: 139.281px;
     }
 
     .rating{
@@ -2711,8 +2719,13 @@ input[type="range"]::-webkit-slider-thumb {
         width: fit-content;
     }
 
+    .filter{
+        width: 307.198px;
+    }
+
     .rating{
-        right: 12px;
+        right: 9px;
+        bottom: 106px;
     }
 
     .nav_hm_shop_keybrd a{
@@ -2783,6 +2796,15 @@ input[type="range"]::-webkit-slider-thumb {
 } 
 
 @media screen and (min-width: 1440px) {
+
+    .product img{
+        width: 243px;
+        height: 162px;
+    }
+
+    .rating{
+        right: 10px;
+    }
 
     .list1, 
     .list2,
