@@ -70,14 +70,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     backicon.classList.add('active');
                 });
             }
-
             if (smallfilter && filterSlide) {
                 smallfilter.addEventListener('click', () => {
                     filterSlide.classList.add('active');
                     closeicon.classList.add('active');
                 });
             }
-
             // Display brand Filter
             if (brandsfilter && brandpannal) {
                 brandsfilter.addEventListener('click', () => {
@@ -85,7 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     filterSlide.classList.remove('active');
                 });
             }
-
             // Display price filter
             if (priceFilter && pricepannal) {
                 priceFilter.addEventListener('click', () => {
@@ -93,7 +90,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     filterSlide.classList.remove('active');
                 });
             }
-
             //close Allfilters 
             if (selectclose && filterSlide) {
                 selectclose.addEventListener('click', () => {
@@ -101,14 +97,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     backicon.classList.remove('active');
                 });
             }
-
             if (closeicon && filterSlide) {
                 closeicon.addEventListener('click', () => {
                     filterSlide.classList.remove('active');
                     closeicon.classList.remove('active');
                 })
             }
-
             //close brand filter
             if (brandback && brandpannal) {
                 brandback.addEventListener('click', () => {
@@ -116,7 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     filterSlide.classList.remove('active');
                 });
             }
-
             //close price filter
             if (priceback && pricepannal) {
                 priceback.addEventListener('click', () => {
@@ -124,7 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     filterSlide.classList.remove('active');
                 });
             }
-
             // ---------- Scroll top with arrow ---------------
             const scrollBtn = document.getElementById('scrolltop');
 
@@ -135,11 +127,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     scrollBtn.classList.remove('show');
                 }
             });
-
             scrollBtn.addEventListener('click', () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
-
             const allFilterBtn = document.getElementById("btnfilter");     // desktop
             const mAllFilterBtn = document.getElementById("m_btnfilter");  // mobile
             const mainFilterPanel = document.querySelector(".filterpannal");
@@ -156,24 +146,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (sizePanel) sizePanel.style.display = "none";
                 if (connectPanel) connectPanel.style.display = "none";
                 if (keySwitchPanel) keySwitchPanel.style.display = "none";
-
                 // show main panel
                 mainFilterPanel.classList.add("active");
 
                 // lock page scroll like Meckeys
                 document.body.style.overflow = "hidden";
             }
-
             // Desktop All Filters
             if (allFilterBtn) {
                 allFilterBtn.addEventListener("click", openMainFilterPanel);
             }
-
             // Mobile All Filters
             if (mAllFilterBtn) {
                 mAllFilterBtn.addEventListener("click", openMainFilterPanel);
             }
-
             // close button inside main filter
             const backBtn = document.querySelector(".filterback .arrowicon");
             if (backBtn) {
@@ -182,11 +168,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.body.style.overflow = "auto";
                 });
             }
-
             const filterBtns = document.querySelectorAll(".filtersmall .filterbtn");
             const dropdowns = document.querySelectorAll(".filtersmall .filter-pannal");
             const parentContainer = document.querySelector(".filtersmall");
-
             // Close all dropdowns
             function closeAll() {
                 dropdowns.forEach(d => d.classList.remove("show"));
@@ -288,17 +272,17 @@ function renderProducts(products) {
         let priceHTML;
         if (product.price.discounted && product.price.actual) {
             priceHTML = `
-                            <strong>
-                                <span style = "text-decoration: line-through;">${product.price.actual}</span>
-                                <span> ${product.price.discounted}</span>
-                            </strong>`;
+                        <strong>
+                            <span style = "text-decoration: line-through;">${product.price.actual}</span>
+                            <span> ${product.price.discounted}</span>
+                        </strong>`;
         }
         else if (product.price.min && product.price.max) {
             priceHTML = `
-                            <strong>
-                                <span> ${product.price.min}</span> – 
-                                <span> ${product.price.max}</span>
-                            </strong>`;
+                        <strong>
+                            <span> ${product.price.min}</span> – 
+                            <span> ${product.price.max}</span>
+                        </strong>`;
         }
         else {
             priceHTML = `<strong><span> </span></strong>`;
@@ -377,7 +361,6 @@ function getActivefilters() {
             label: `Price to: ₹${currentMax}`
         })
     }
-
     const uniqueActive = [];
     const seenKeys = new Set();
 
@@ -425,7 +408,6 @@ function renderActiveFilters() {
     if (clearAllBtn) {
         clearAllBtn.style.display = active.length > 1 ? 'inline-block' : 'none';
     }
-
     updateClearAllButtonVisibility();
 }
 
@@ -536,9 +518,6 @@ function hookActiveFilterRenderers() {
 
     if (clearAllBtn) {
         clearAllBtn.addEventListener('click', () => {
-            const filtersbtn = document.getElementById('activeFiltersContainer');
-            filtersbtn.style.display = 'none';
-            clearAllBtn.style.display = 'none';
                         
             document.querySelectorAll('input[type="checkbox"],input[type="radio"]').forEach(i => i.checked = false);
 
@@ -553,11 +532,9 @@ function hookActiveFilterRenderers() {
 
             renderActiveFilters();
             if (typeof applyAllfilter === 'function') applyAllfilter();
-        });
-        
+        });        
     }
 }
-
 
 // ------------------------------------------ All slider working---------------------------------------------------------
 function updateSlider(e) {
@@ -640,7 +617,7 @@ function priceupdateSlider(e) {
 
     if (!priceupdateSlider.syncing) {
         priceupdateSlider.syncing = true;
-
+        
         minRange.value = minVal;
         maxRange.value = maxVal;
         minPrice.value = `₹${minVal}`;
@@ -688,7 +665,6 @@ function smallPriceUpdateSlider(e) {
     // Update label text
     smallpricemin.value = `₹${minVal}`;
     smallpricemax.value = `₹${maxVal}`;
-
     // Update line track if you have one
     if (smallpricelinefilter) {
         const sliderWidth = smallpricelinefilter.offsetWidth;
@@ -707,13 +683,10 @@ function smallPriceUpdateSlider(e) {
         priceupdateSlider();
         smallPriceUpdateSlider.syncing = false;
     }
-
     applyAllfilter();
 }
-
 smallminthumbprice.addEventListener("input", smallPriceUpdateSlider);
 smallmaxthumbprice.addEventListener("input", smallPriceUpdateSlider);
-
 // ------------------------------------------ To clear in all filter buttons---------------------------------------------------------
 // for clear button
 document.getElementById('btnclearfilter').addEventListener('click', () => {
@@ -745,7 +718,6 @@ document.getElementById('btnbrandfilter').addEventListener('click', () => {
 document.getElementById('btnpricefilter').addEventListener('click', () => {
     minthumbprice.value = "3500";
     maxthumbprice.value = "13999";
-
     if (minthumbprice) pricemin.value = "min.";
     if (maxthumbprice) pricemax.value = "max.";
 
@@ -769,7 +741,6 @@ if (brandClearBtn) {
         if (allFilterClearBtn) {
             allFilterClearBtn.style.display = 'none';
         }
-
         syncBrandFilters();
         applyAllfilter();
     });
@@ -934,7 +905,6 @@ function applyAllfilter() {
                 priceValue = parseInt(p.price.max.replace(/[₹,]/g, '')) || 0;
             }
         }
-
         else {
             priceValue = parseInt(p.price.replace(/[₹,]/g, '')) || 0;
         }
