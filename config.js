@@ -661,7 +661,7 @@ document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
     cb.addEventListener('click', (e) => {
 
         setTimeout(() => {
-            if(cb.closest('.brandslist') || cb.closest('.brandslistfilter')){
+            if(cb.closest('brandslist') || cb.closest('.brandslistfilter')){
                 syncBrandFilters();
             }
             applyAllfilter();
